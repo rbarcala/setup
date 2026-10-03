@@ -82,101 +82,145 @@ else
 fi
 log_success "Xournal++ y extensión Pen-GUI-n instalados en ~/.config/xournalpp/plugins/Pen-GUI-n"
 
+log_info "Instalando tema Dracula para Xournal++..."
+DRACULA_TEMP_DIR="$(mktemp -d /tmp/dracula-xournalpp-XXXXXX)"
+git clone --depth 1 https://github.com/dracula/xournalpp.git "$DRACULA_TEMP_DIR"
+
+# Copiar paleta de colores
+cp "$DRACULA_TEMP_DIR/palette.gpl" "$HOME/.config/xournalpp/palette.gpl"
+
+# Agregar toolbar Dracula a toolbar.ini (solo si no existe ya)
+TOOLBAR_INI="$HOME/.config/xournalpp/toolbar.ini"
+touch "$TOOLBAR_INI"
+if ! grep -q '^\[Dracula\]' "$TOOLBAR_INI"; then
+    echo "" >> "$TOOLBAR_INI"
+    cat "$DRACULA_TEMP_DIR/dracula-toolbar.ini" >> "$TOOLBAR_INI"
+fi
+
+rm -rf "$DRACULA_TEMP_DIR"
+log_success "Tema Dracula instalado. Para activarlo manualmente en Xournal++:"
+log_info "  1. View → Toolbars → seleccionar 'Dracula'"
+log_info "  2. Journal → Configure Page Template → Background Color: #282a36"
+
 # ------------------------------------------------------------------------------
 # 3. Spotify
 # ------------------------------------------------------------------------------
-log_info "Instalando Spotify..."
-if command -v snap >/dev/null 2>&1; then
-    sudo snap install spotify || true
+if command -v spotify >/dev/null 2>&1 || snap list spotify &>/dev/null; then
+    log_success "Spotify ya está instalado, saltando."
 else
-    sudo mkdir -p /etc/apt/keyrings
-    curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/spotify.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-    sudo apt update
-    sudo apt install -y spotify-client
+    log_info "Instalando Spotify..."
+    if command -v snap >/dev/null 2>&1; then
+        sudo snap install spotify || true
+    else
+        sudo mkdir -p /etc/apt/keyrings
+        curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/spotify.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+        sudo apt update
+        sudo apt install -y spotify-client
+    fi
+    log_success "Spotify instalado con éxito."
 fi
-log_success "Spotify instalado con éxito."
 
 # ------------------------------------------------------------------------------
 # 4. Discord con Vencord
 # ------------------------------------------------------------------------------
-log_info "Instalando Discord (.deb oficial) y Vencord..."
-DISCORD_DEB="/tmp/discord.deb"
-wget -O "$DISCORD_DEB" "https://discord.com/api/download?platform=linux&format=deb"
-sudo apt install -y "$DISCORD_DEB"
-rm -f "$DISCORD_DEB"
+if dpkg -s discord &>/dev/null; then
+    log_success "Discord ya está instalado, saltando."
+else
+    log_info "Instalando Discord (.deb oficial) y Vencord..."
+    DISCORD_DEB="/tmp/discord.deb"
+    wget -O "$DISCORD_DEB" "https://discord.com/api/download?platform=linux&format=deb"
+    sudo apt install -y "$DISCORD_DEB"
+    rm -f "$DISCORD_DEB"
 
-VENCORD_BIN="/tmp/VencordInstallerCli-linux"
-wget -O "$VENCORD_BIN" "https://github.com/Vendicated/VencordInstaller/releases/latest/download/VencordInstallerCli-linux"
-chmod +x "$VENCORD_BIN"
+    VENCORD_BIN="/tmp/VencordInstallerCli-linux"
+    wget -O "$VENCORD_BIN" "https://github.com/Vendicated/VencordInstaller/releases/latest/download/VencordInstallerCli-linux"
+    chmod +x "$VENCORD_BIN"
 
-log_info "Inyectando Vencord en Discord..."
-"$VENCORD_BIN" -install -branch stable || sudo "$VENCORD_BIN" -install -branch stable || true
-rm -f "$VENCORD_BIN"
-log_success "Discord con Vencord instalado."
+    log_info "Inyectando Vencord en Discord..."
+    "$VENCORD_BIN" -install -branch stable || sudo "$VENCORD_BIN" -install -branch stable || true
+    rm -f "$VENCORD_BIN"
+    log_success "Discord con Vencord instalado."
+fi
 
 # ------------------------------------------------------------------------------
 # 5. OBS Studio (PPA oficial de obsproject, versión más reciente)
 # ------------------------------------------------------------------------------
-log_info "Añadiendo PPA oficial de OBS Studio (obsproject/obs-studio)..."
-sudo add-apt-repository -y ppa:obsproject/obs-studio
-sudo apt update
-sudo apt install -y obs-studio
-log_success "OBS Studio instalado desde PPA obsproject."
+if dpkg -s obs-studio &>/dev/null; then
+    log_success "OBS Studio ya está instalado, saltando."
+else
+    log_info "Añadiendo PPA oficial de OBS Studio (obsproject/obs-studio)..."
+    sudo add-apt-repository -y ppa:obsproject/obs-studio
+    sudo apt update
+    sudo apt install -y obs-studio
+    log_success "OBS Studio instalado desde PPA obsproject."
+fi
 
 # ------------------------------------------------------------------------------
 # 6. Grub Customizer
 # ------------------------------------------------------------------------------
-log_info "Instalando Grub Customizer..."
-sudo add-apt-repository -y ppa:danielrichter2007/grub-customizer
-sudo apt update
-sudo apt install -y grub-customizer || {
-    log_warn "No se pudo instalar desde el PPA directamente, intentando desde repositorio universe..."
-    sudo apt install -y grub-customizer || true
-}
-log_success "Grub Customizer instalado."
+if command -v grub-customizer >/dev/null 2>&1; then
+    log_success "Grub Customizer ya está instalado, saltando."
+else
+    log_info "Instalando Grub Customizer..."
+    sudo add-apt-repository -y ppa:danielrichter2007/grub-customizer
+    sudo apt update
+    sudo apt install -y grub-customizer || {
+        log_warn "No se pudo instalar desde el PPA directamente, intentando desde repositorio universe..."
+        sudo apt install -y grub-customizer || true
+    }
+    log_success "Grub Customizer instalado."
+fi
 
 # ------------------------------------------------------------------------------
 # 7. MEGA (megasync)
 # ------------------------------------------------------------------------------
-log_info "Configurando repositorio e instalando MEGA (megasync)..."
-sudo mkdir -p /etc/apt/keyrings
-wget -qO - https://mega.nz/keys/meganz-archive-keyring.gpg | sudo tee /etc/apt/keyrings/meganz-archive-keyring.gpg >/dev/null
+if command -v megasync >/dev/null 2>&1; then
+    log_success "MEGA ya está instalado, saltando."
+else
+    log_info "Configurando repositorio e instalando MEGA (megasync)..."
+    sudo mkdir -p /etc/apt/keyrings
+    wget -qO - https://mega.nz/keys/meganz-archive-keyring.gpg | sudo tee /etc/apt/keyrings/meganz-archive-keyring.gpg >/dev/null
 
-UBUNTU_RELEASE="$(lsb_release -rs 2>/dev/null || echo '24.04')"
+    UBUNTU_RELEASE="$(lsb_release -rs 2>/dev/null || echo '24.04')"
 
-cat <<EOF | sudo tee /etc/apt/sources.list.d/megaio.sources >/dev/null
+    cat <<EOF | sudo tee /etc/apt/sources.list.d/megaio.sources >/dev/null
 Types: deb
 URIs: https://mega.nz/linux/repo/xUbuntu_${UBUNTU_RELEASE}/
 Suites: ./
 Signed-By: /etc/apt/keyrings/meganz-archive-keyring.gpg
 EOF
 
-sudo apt update || true
-if ! sudo apt install -y megasync; then
-    log_warn "Repositorio específico no encontrado para xUbuntu_${UBUNTU_RELEASE}, intentando fallback xUbuntu_24.04..."
-    cat <<EOF | sudo tee /etc/apt/sources.list.d/megaio.sources >/dev/null
+    sudo apt update || true
+    if ! sudo apt install -y megasync; then
+        log_warn "Repositorio específico no encontrado para xUbuntu_${UBUNTU_RELEASE}, intentando fallback xUbuntu_24.04..."
+        cat <<EOF | sudo tee /etc/apt/sources.list.d/megaio.sources >/dev/null
 Types: deb
 URIs: https://mega.nz/linux/repo/xUbuntu_24.04/
 Suites: ./
 Signed-By: /etc/apt/keyrings/meganz-archive-keyring.gpg
 EOF
-    sudo apt update
-    sudo apt install -y megasync
+        sudo apt update
+        sudo apt install -y megasync
+    fi
+    sudo apt install -y nautilus-megasync 2>/dev/null || true
+    log_success "MEGA instalado."
 fi
-sudo apt install -y nautilus-megasync 2>/dev/null || true
-log_success "MEGA instalado."
 
 # ------------------------------------------------------------------------------
 # 8. Visual Studio Code
 # ------------------------------------------------------------------------------
-log_info "Configurando repositorio e instalando Visual Studio Code..."
-sudo mkdir -p /etc/apt/keyrings
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/packages.microsoft.gpg > /dev/null
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
-sudo apt update
-sudo apt install -y code
-log_success "Visual Studio Code instalado."
+if command -v code >/dev/null 2>&1; then
+    log_success "Visual Studio Code ya está instalado, saltando."
+else
+    log_info "Configurando repositorio e instalando Visual Studio Code..."
+    sudo mkdir -p /etc/apt/keyrings
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/packages.microsoft.gpg > /dev/null
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+    sudo apt update
+    sudo apt install -y code
+    log_success "Visual Studio Code instalado."
+fi
 
 # ------------------------------------------------------------------------------
 # 9. Clipboard Indicator (Extensión GNOME) + Reemplazo de hotkey Super+V
@@ -224,42 +268,57 @@ log_success "Clipboard Indicator configurado con hotkey Super+V."
 # ------------------------------------------------------------------------------
 # 10. YoutubeController viewer
 # ------------------------------------------------------------------------------
-log_info "Instalando dependencias de Youtube Playlist/Viewer Controller..."
-sudo apt install -y python3-flask yt-dlp python3-requests python3-qrcode gir1.2-gtk-3.0 gir1.2-webkit2-4.1 ffmpeg xdotool wmctrl python3-venv
-
-CONTROLLER_TEMP_DIR=""
-
-# Verificar si el repo ya está en la misma carpeta o adyacente, de lo contrario clonarlo temporalmente
-if [ -d "$SCRIPT_DIR/YoutubePlaylist-ViewerController" ]; then
-    CONTROLLER_SRC="$SCRIPT_DIR/YoutubePlaylist-ViewerController"
-    DELETE_AFTER_INSTALL=false
-elif [ -d "$SCRIPT_DIR/../YoutubePlaylist-ViewerController" ]; then
-    CONTROLLER_SRC="$SCRIPT_DIR/../YoutubePlaylist-ViewerController"
-    DELETE_AFTER_INSTALL=false
+if command -v youtube-stream-controller >/dev/null 2>&1 || dpkg -s youtube-stream-controller &>/dev/null; then
+    log_success "Youtube Playlist / Viewer Controller ya está instalado, saltando."
 else
-    CONTROLLER_TEMP_DIR="$(mktemp -d /tmp/youtube-stream-controller-XXXXXX)"
-    log_info "Descargando Youtube Playlist Controller a $CONTROLLER_TEMP_DIR..."
-    git clone https://github.com/rbarcala/YoutubePlaylist-ViewerController.git "$CONTROLLER_TEMP_DIR"
-    CONTROLLER_SRC="$CONTROLLER_TEMP_DIR"
-    DELETE_AFTER_INSTALL=true
-fi
+    log_info "Instalando dependencias de Youtube Playlist/Viewer Controller..."
+    sudo apt install -y python3-flask yt-dlp python3-requests python3-qrcode gir1.2-gtk-3.0 gir1.2-webkit2-4.1 ffmpeg xdotool wmctrl python3-venv
 
-log_info "Ejecutando make install en $CONTROLLER_SRC..."
-(
-    cd "$CONTROLLER_SRC"
-    make install
-    if [ -f "release/youtube-stream-controller_1.0.0_all.deb" ]; then
-        sudo apt install -y ./release/youtube-stream-controller_1.0.0_all.deb || true
+    CONTROLLER_TEMP_DIR=""
+
+    # Verificar si el repo ya está en la misma carpeta o adyacente, de lo contrario clonarlo temporalmente
+    if [ -d "$SCRIPT_DIR/YoutubePlaylist-ViewerController" ]; then
+        CONTROLLER_SRC="$SCRIPT_DIR/YoutubePlaylist-ViewerController"
+        DELETE_AFTER_INSTALL=false
+    elif [ -d "$SCRIPT_DIR/../YoutubePlaylist-ViewerController" ]; then
+        CONTROLLER_SRC="$SCRIPT_DIR/../YoutubePlaylist-ViewerController"
+        DELETE_AFTER_INSTALL=false
+    else
+        CONTROLLER_TEMP_DIR="$(mktemp -d /tmp/youtube-stream-controller-XXXXXX)"
+        log_info "Descargando Youtube Playlist Controller a $CONTROLLER_TEMP_DIR..."
+        git clone https://github.com/rbarcala/YoutubePlaylist-ViewerController.git "$CONTROLLER_TEMP_DIR"
+        CONTROLLER_SRC="$CONTROLLER_TEMP_DIR"
+        DELETE_AFTER_INSTALL=true
     fi
-)
 
-# Si se descargó en temporal, borrar el repositorio descargado
-if [ "$DELETE_AFTER_INSTALL" = true ] && [ -n "$CONTROLLER_TEMP_DIR" ] && [ -d "$CONTROLLER_TEMP_DIR" ]; then
-    log_info "Eliminando repositorio temporal descargado ($CONTROLLER_TEMP_DIR)..."
-    rm -rf "$CONTROLLER_TEMP_DIR"
+    log_info "Ejecutando make install en $CONTROLLER_SRC..."
+    (
+        cd "$CONTROLLER_SRC"
+        make install
+        if [ -f "release/youtube-stream-controller_1.0.0_all.deb" ]; then
+            sudo apt install -y ./release/youtube-stream-controller_1.0.0_all.deb || true
+        fi
+    )
+
+    # Si se descargó en temporal, borrar el repositorio descargado
+    if [ "$DELETE_AFTER_INSTALL" = true ] && [ -n "$CONTROLLER_TEMP_DIR" ] && [ -d "$CONTROLLER_TEMP_DIR" ]; then
+        log_info "Eliminando repositorio temporal descargado ($CONTROLLER_TEMP_DIR)..."
+        rm -rf "$CONTROLLER_TEMP_DIR"
+    fi
+
+    log_success "Youtube Playlist / Viewer Controller instalado."
 fi
 
-log_success "Youtube Playlist / Viewer Controller instalado."
+# ------------------------------------------------------------------------------
+# 11. Slack
+# ------------------------------------------------------------------------------
+if snap list slack &>/dev/null; then
+    log_success "Slack ya está instalado, saltando."
+else
+    log_info "Instalando Slack..."
+    sudo snap install slack || true
+    log_success "Slack instalado."
+fi
 
 # ------------------------------------------------------------------------------
 # Finalización
