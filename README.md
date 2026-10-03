@@ -4,6 +4,13 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
 
 ## Contenido instalado y configurado
 
+### Dependencias base
+
+- **Paquetes base**: `curl`, `wget`, `gpg`, `software-properties-common`, `make`, `build-essential`, `lsb-release`, etc.
+- **snapd**: Instalado automáticamente si no está presente. En **Linux Mint** se detecta y deshabilita el bloqueo `nosnap.pref` antes de instalar.
+
+### Aplicaciones
+
 1. **Git**: Configurado automáticamente con nombre (`Ramiro Barcala Roca`) y correo (`rbarcala@fi.uba.ar`).
 2. **Xournal++**: Instalación nativa con soporte para plugins/extensiones Lua y fórmulas LaTeX (`lua5.4`, `lua-lgi`, `dvipng`, etc.).
    - **Pen-GUI-n**: Extensión de interfaz gráfica (incluida en el repo o descargada desde GitHub).

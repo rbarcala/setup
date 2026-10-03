@@ -50,7 +50,29 @@ log_info "Iniciando instalación y configuración del sistema..."
 # ------------------------------------------------------------------------------
 log_info "Instalando paquetes base (curl, wget, gpg, software-properties-common, make, build-essential)..."
 sudo apt update
-sudo apt install -y curl wget gpg apt-transport-https software-properties-common ca-certificates make build-essential
+sudo apt install -y curl wget gpg apt-transport-https software-properties-common ca-certificates make build-essential lsb-release
+
+# ------------------------------------------------------------------------------
+# Snap (necesario para Spotify, Slack)
+# ------------------------------------------------------------------------------
+if ! command -v snap >/dev/null 2>&1; then
+    log_info "Instalando snapd..."
+
+    # Linux Mint bloquea snap con nosnap.pref; lo deshabilitamos si existe
+    if [ -f /etc/apt/preferences.d/nosnap.pref ]; then
+        log_warn "Detectado bloqueo de snap (Linux Mint). Deshabilitando nosnap.pref..."
+        sudo mv /etc/apt/preferences.d/nosnap.pref /etc/apt/preferences.d/nosnap.pref.backup
+        sudo apt update
+    fi
+
+    sudo apt install -y snapd
+    sudo systemctl enable --now snapd.socket
+    # Esperar a que el socket de snap esté listo
+    sudo snap wait system seed.loaded 2>/dev/null || sleep 5
+    log_success "snapd instalado y habilitado."
+else
+    log_success "snapd ya está disponible."
+fi
 
 # ------------------------------------------------------------------------------
 # 1. Git (Configuración de usuario)
