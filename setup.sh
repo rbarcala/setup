@@ -29,6 +29,9 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
+# Obtener directorio donde reside este script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Comprobar que no se ejecute el script completo directamente con sudo (necesitamos $USER y variables de entorno de escritorio)
 if [ "$EUID" -eq 0 ]; then
     log_error "No ejecutes este script como root o con sudo directamente."
@@ -60,12 +63,24 @@ git config --global init.defaultBranch main
 log_success "Git configurado con: $(git config --global user.name) <$(git config --global user.email)>"
 
 # ------------------------------------------------------------------------------
-# 2. Xournal++ (con soporte para extensiones / plugins Lua y LaTeX)
+# 2. Xournal++ y extensión Pen-GUI-n (soporte para extensiones / plugins Lua y LaTeX)
 # ------------------------------------------------------------------------------
 log_info "Instalando Xournal++ nativo y dependencias para plugins/extensiones..."
 sudo apt install -y xournalpp lua5.4 liblua5.4-0 lua-lgi dvipng texlive-latex-base
 mkdir -p "$HOME/.config/xournalpp/plugins"
-log_success "Xournal++ instalado nativamente. Carpeta de plugins lista en ~/.config/xournalpp/plugins"
+
+log_info "Instalando extensión/plugin Pen-GUI-n en Xournal++..."
+PENGUIN_TARGET="$HOME/.config/xournalpp/plugins/Pen-GUI-n"
+mkdir -p "$PENGUIN_TARGET"
+
+if [ -d "$SCRIPT_DIR/Pen-GUI-n" ]; then
+    log_info "Copiando Pen-GUI-n desde el directorio local del repositorio..."
+    cp -r "$SCRIPT_DIR/Pen-GUI-n/"* "$PENGUIN_TARGET/"
+else
+    log_info "Descargando Pen-GUI-n desde GitHub..."
+    git clone "https://github.com/Mr-FuzzyPenguin/Pen-GUI-n.git" "$PENGUIN_TARGET" || true
+fi
+log_success "Xournal++ y extensión Pen-GUI-n instalados en ~/.config/xournalpp/plugins/Pen-GUI-n"
 
 # ------------------------------------------------------------------------------
 # 3. Spotify
@@ -96,7 +111,6 @@ wget -O "$VENCORD_BIN" "https://github.com/Vendicated/VencordInstaller/releases/
 chmod +x "$VENCORD_BIN"
 
 log_info "Inyectando Vencord en Discord..."
-# Intentar parchear a nivel de usuario, o con sudo si el destino requiere permisos
 "$VENCORD_BIN" -install -branch stable || sudo "$VENCORD_BIN" -install -branch stable || true
 rm -f "$VENCORD_BIN"
 log_success "Discord con Vencord instalado."
@@ -129,10 +143,8 @@ log_info "Configurando repositorio e instalando MEGA (megasync)..."
 sudo mkdir -p /etc/apt/keyrings
 wget -qO - https://mega.nz/keys/meganz-archive-keyring.gpg | sudo tee /etc/apt/keyrings/meganz-archive-keyring.gpg >/dev/null
 
-UBUNTU_CODENAME="$(lsb_release -cs 2>/dev/null || echo 'noble')"
 UBUNTU_RELEASE="$(lsb_release -rs 2>/dev/null || echo '24.04')"
 
-# Crear archivo de fuentes para APT
 cat <<EOF | sudo tee /etc/apt/sources.list.d/megaio.sources >/dev/null
 Types: deb
 URIs: https://mega.nz/linux/repo/xUbuntu_${UBUNTU_RELEASE}/
@@ -216,7 +228,6 @@ log_info "Instalando dependencias de Youtube Playlist/Viewer Controller..."
 sudo apt install -y python3-flask yt-dlp python3-requests python3-qrcode gir1.2-gtk-3.0 gir1.2-webkit2-4.1 ffmpeg xdotool wmctrl python3-venv
 
 CONTROLLER_TEMP_DIR=""
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Verificar si el repo ya está en la misma carpeta o adyacente, de lo contrario clonarlo temporalmente
 if [ -d "$SCRIPT_DIR/YoutubePlaylist-ViewerController" ]; then
@@ -237,7 +248,6 @@ log_info "Ejecutando make install en $CONTROLLER_SRC..."
 (
     cd "$CONTROLLER_SRC"
     make install
-    # Si existe target de deb y herramientas, instalar deb del sistema para garantizar persistencia global
     if [ -f "release/youtube-stream-controller_1.0.0_all.deb" ]; then
         sudo apt install -y ./release/youtube-stream-controller_1.0.0_all.deb || true
     fi
