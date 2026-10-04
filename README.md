@@ -24,7 +24,7 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
    - **Wayland nativo**: Se clona y parchea el archivo `.desktop` en `~/.local/share/applications` para forzar `QT_QPA_PLATFORM=wayland`. Además, el script limpia automáticamente la geometría de los paneles guardada en `user.ini` para evitar que la UI se rompa por el cambio de X11 a Wayland.
 
 ### 🛠️ Script Auxiliar: `save_obs_to_repo.sh`
-Se incluye el script `save_obs_to_repo.sh` para facilitar las actualizaciones. Si modificás tus escenas en OBS o agregás imágenes nuevas a tu carpeta original (`MEGA/DOCS/OBS`), simplemente ejecutá `./save_obs_to_repo.sh` y el script copiará automáticamente la última versión de tus JSON y Assets a la carpeta `obs-config/` del repositorio para que puedas subirlos a Git fácilmente.
+Se incluye el script `save_obs_to_repo.sh` para facilitar las actualizaciones. Si modificás tus escenas en OBS o agregás imágenes/videos nuevos a la carpeta de recursos del sistema (`~/.local/share/obs-assets`), simplemente ejecutá `./save_obs_to_repo.sh` y el script copiará automáticamente la última versión de tus JSON y generará el `.zip` listo para subir a GitHub Releases.
 6. **Grub Customizer**: Repositorio PPA oficial (`ppa:danielrichter2007/grub-customizer`).
 7. **MEGA (megasync)**: Repositorio e integración oficial de MEGA con extensión para Nautilus.
 8. **Visual Studio Code**: Repositorio oficial de Microsoft APT con clave GPG dedicada.

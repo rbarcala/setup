@@ -221,14 +221,18 @@ if [ -d "$SCRIPT_DIR/obs-config" ]; then
     # Descargar desde GitHub Releases en lugar de copiar localmente
     log_info "Descargando recursos multimedia (Assets) desde GitHub Releases..."
     ASSETS_URL="https://github.com/rbarcala/setup/releases/latest/download/obs-assets.zip"
+    rm -f /tmp/obs-assets.zip
     wget -q --show-progress -O /tmp/obs-assets.zip "$ASSETS_URL" || true
-    if [ -f "/tmp/obs-assets.zip" ]; then
+    
+    # Validar que el archivo descargado sea realmente un ZIP (para evitar errores si GitHub devuelve un 404 html)
+    if [ -f "/tmp/obs-assets.zip" ] && file "/tmp/obs-assets.zip" | grep -qi "zip archive"; then
         unzip -o -q /tmp/obs-assets.zip -d /tmp/obs_unzip_temp
         cp -r /tmp/obs_unzip_temp/assets/* "$ASSETS_DEST/" 2>/dev/null || true
         rm -rf /tmp/obs-assets.zip /tmp/obs_unzip_temp
         log_success "Assets descargados e instalados."
     else
-        log_warn "No se pudo descargar obs-assets.zip. Asegurate de haberlo subido a GitHub Releases."
+        log_warn "No se pudo descargar obs-assets.zip correctamente. ¿Ya lo subiste a GitHub Releases?"
+        rm -f /tmp/obs-assets.zip
     fi
 
     # 2. Copiar escenas y reemplazar las rutas absolutas antiguas por las nuevas

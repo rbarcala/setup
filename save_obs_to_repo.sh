@@ -4,7 +4,7 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/obs-config"
-ASSETS_SRC="/home/$USER/MEGA/DOCS/OBS"
+ASSETS_SRC="$HOME/.local/share/obs-assets"
 SCENES_SRC="$HOME/.config/obs-studio/basic/scenes"
 
 echo "========================================"
