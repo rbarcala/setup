@@ -256,6 +256,37 @@ if [ -d "$SCRIPT_DIR/obs-config" ]; then
 fi
 
 # ------------------------------------------------------------------------------
+# Parche de OBS para Wayland nativo (Solución a lag y XWayland)
+# ------------------------------------------------------------------------------
+log_info "Configurando OBS para usar el motor nativo de Wayland (-platform wayland)..."
+mkdir -p ~/.local/share/applications
+cp /usr/share/applications/*obs*.desktop ~/.local/share/applications/ 2>/dev/null || true
+
+if ls ~/.local/share/applications/*obs*.desktop 1> /dev/null 2>&1; then
+    sed -i 's|^Exec=obs|Exec=obs -platform wayland|g' ~/.local/share/applications/*obs*.desktop
+    update-desktop-database ~/.local/share/applications/ 2>/dev/null || true
+    log_success "OBS configurado para arrancar en Wayland nativo."
+    
+    # Mostrar advertencia informativa del analizador de OBS
+    echo ""
+    echo "========================================================================="
+    echo " IMPORTANTE: OBS Y WAYLAND (Solución de Lag en NVIDIA)"
+    echo "========================================================================="
+    echo "El analizador oficial de OBS recomendó evitar que OBS se ejecute bajo XWayland"
+    echo "porque produce un desajuste severo en la entrega de fotogramas (frame pacing)"
+    echo "y bloquea la captura de PipeWire."
+    echo ""
+    echo "Si tenés problemas de UI o los paneles se desacomodan:"
+    echo "  1. Cerrá OBS por completo: killall -9 obs 2>/dev/null"
+    echo "  2. Abrilo desde el menú de aplicaciones (ahora usa -platform wayland)."
+    echo "  3. En el menú superior de OBS: Docks > Reset UI (Restablecer interfaz)."
+    echo "========================================================================="
+    echo ""
+else
+    log_warn "No se encontró un acceso directo de OBS (.desktop) para parchear a Wayland."
+fi
+
+# ------------------------------------------------------------------------------
 # 6. Grub Customizer
 # ------------------------------------------------------------------------------
 if command -v grub-customizer >/dev/null 2>&1; then
