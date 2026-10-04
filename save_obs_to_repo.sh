@@ -19,6 +19,11 @@ mkdir -p "$CONFIG_DIR/scenes"
 if [ -d "$ASSETS_SRC" ]; then
     echo "[INFO] Sincronizando assets desde $ASSETS_SRC..."
     rsync -av --delete "$ASSETS_SRC/" "$CONFIG_DIR/assets/"
+    
+    echo "[INFO] Comprimiendo assets en obs-assets.zip (para subir a GitHub Releases)..."
+    (cd "$CONFIG_DIR" && zip -r -q ../obs-assets.zip assets/)
+    echo "[OK] Archivo obs-assets.zip generado. Tamaño:"
+    du -h "$SCRIPT_DIR/obs-assets.zip"
 else
     echo "[AVISO] No se encontró el directorio de origen de assets: $ASSETS_SRC"
 fi

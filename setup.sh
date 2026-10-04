@@ -217,8 +217,18 @@ if [ -d "$SCRIPT_DIR/obs-config" ]; then
     # 1. Copiar assets a un lugar estándar del sistema para que no dependa de MEGA/DOCS
     ASSETS_DEST="$HOME/.local/share/obs-assets"
     mkdir -p "$ASSETS_DEST"
-    if [ -d "$SCRIPT_DIR/obs-config/assets" ]; then
-        cp -r "$SCRIPT_DIR/obs-config/assets/"* "$ASSETS_DEST/" 2>/dev/null || true
+    
+    # Descargar desde GitHub Releases en lugar de copiar localmente
+    log_info "Descargando recursos multimedia (Assets) desde GitHub Releases..."
+    ASSETS_URL="https://github.com/rbarcala/setup/releases/latest/download/obs-assets.zip"
+    wget -q --show-progress -O /tmp/obs-assets.zip "$ASSETS_URL" || true
+    if [ -f "/tmp/obs-assets.zip" ]; then
+        unzip -o -q /tmp/obs-assets.zip -d /tmp/obs_unzip_temp
+        cp -r /tmp/obs_unzip_temp/assets/* "$ASSETS_DEST/" 2>/dev/null || true
+        rm -rf /tmp/obs-assets.zip /tmp/obs_unzip_temp
+        log_success "Assets descargados e instalados."
+    else
+        log_warn "No se pudo descargar obs-assets.zip. Asegurate de haberlo subido a GitHub Releases."
     fi
 
     # 2. Copiar escenas y reemplazar las rutas absolutas antiguas por las nuevas
