@@ -99,8 +99,13 @@ if [ -d "$SCRIPT_DIR/Pen-GUI-n" ]; then
     log_info "Copiando Pen-GUI-n desde el directorio local del repositorio..."
     cp -r "$SCRIPT_DIR/Pen-GUI-n/"* "$PENGUIN_TARGET/"
 else
-    log_info "Descargando Pen-GUI-n desde GitHub..."
-    git clone "https://github.com/Mr-FuzzyPenguin/Pen-GUI-n.git" "$PENGUIN_TARGET" || true
+    if [ -d "$PENGUIN_TARGET/.git" ]; then
+        log_info "Actualizando Pen-GUI-n desde GitHub..."
+        git -C "$PENGUIN_TARGET" pull || true
+    else
+        log_info "Descargando Pen-GUI-n desde GitHub..."
+        git clone "https://github.com/Mr-FuzzyPenguin/Pen-GUI-n.git" "$PENGUIN_TARGET" || true
+    fi
 fi
 log_success "Xournal++ y extensión Pen-GUI-n instalados en ~/.config/xournalpp/plugins/Pen-GUI-n"
 
@@ -147,23 +152,23 @@ fi
 # 4. Discord con Vencord
 # ------------------------------------------------------------------------------
 if dpkg -s discord &>/dev/null; then
-    log_success "Discord ya está instalado, saltando."
+    log_success "Discord ya está instalado."
 else
-    log_info "Instalando Discord (.deb oficial) y Vencord..."
+    log_info "Instalando Discord (.deb oficial)..."
     DISCORD_DEB="/tmp/discord.deb"
     wget -O "$DISCORD_DEB" "https://discord.com/api/download?platform=linux&format=deb"
     sudo apt install -y "$DISCORD_DEB"
     rm -f "$DISCORD_DEB"
-
-    VENCORD_BIN="/tmp/VencordInstallerCli-linux"
-    wget -O "$VENCORD_BIN" "https://github.com/Vendicated/VencordInstaller/releases/latest/download/VencordInstallerCli-linux"
-    chmod +x "$VENCORD_BIN"
-
-    log_info "Inyectando Vencord en Discord..."
-    "$VENCORD_BIN" -install -branch stable || sudo "$VENCORD_BIN" -install -branch stable || true
-    rm -f "$VENCORD_BIN"
-    log_success "Discord con Vencord instalado."
+    log_success "Discord instalado."
 fi
+
+log_info "Verificando/Inyectando Vencord en Discord..."
+VENCORD_BIN="/tmp/VencordInstallerCli-linux"
+wget -qO "$VENCORD_BIN" "https://github.com/Vendicated/VencordInstaller/releases/latest/download/VencordInstallerCli-linux"
+chmod +x "$VENCORD_BIN"
+"$VENCORD_BIN" -install -branch stable >/dev/null 2>&1 || sudo "$VENCORD_BIN" -install -branch stable >/dev/null 2>&1 || true
+rm -f "$VENCORD_BIN"
+log_success "Vencord inyectado/actualizado."
 
 # ------------------------------------------------------------------------------
 # 5. OBS Studio (PPA oficial de obsproject, versión más reciente)
@@ -177,6 +182,35 @@ else
     sudo apt install -y obs-studio
     log_success "OBS Studio instalado desde PPA obsproject."
 fi
+
+log_info "Instalando plugin obs-shaderfilter para OBS Studio..."
+OBS_PLUGIN_DIR="$HOME/.config/obs-studio/plugins/obs-shaderfilter"
+if [ -d "$OBS_PLUGIN_DIR" ]; then
+    log_success "Plugin obs-shaderfilter ya está instalado, saltando."
+else
+    # Obtener el último release de Ubuntu desde GitHub API
+    SHADERFILTER_URL=$(curl -s https://api.github.com/repos/exeldro/obs-shaderfilter/releases/latest | grep browser_download_url | grep -i ubuntu | cut -d '"' -f 4 | head -n 1)
+    if [ -n "$SHADERFILTER_URL" ]; then
+        log_info "Descargando obs-shaderfilter desde: $SHADERFILTER_URL"
+        wget -qO /tmp/obs-shaderfilter.tar.gz "$SHADERFILTER_URL"
+        mkdir -p "$HOME/.config/obs-studio/plugins"
+        tar -xzf /tmp/obs-shaderfilter.tar.gz -C "$HOME/.config/obs-studio/plugins/"
+        rm /tmp/obs-shaderfilter.tar.gz
+        log_success "Plugin obs-shaderfilter instalado correctamente."
+    else
+        log_warn "No se pudo encontrar el paquete para Ubuntu de obs-shaderfilter. Instalación saltada."
+    fi
+fi
+
+log_info "Configurando wrapper de OBS para forzar QT_QPA_PLATFORM=xcb..."
+sudo tee /usr/local/bin/obs > /dev/null << 'EOF'
+#!/bin/bash
+BIN=$(which -a obs | grep -v "/usr/local/bin/obs" | head -n 1)
+export QT_QPA_PLATFORM=xcb
+exec "$BIN" "$@"
+EOF
+sudo chmod +x /usr/local/bin/obs
+log_success "Wrapper de OBS configurado en /usr/local/bin/obs."
 
 # ------------------------------------------------------------------------------
 # 6. Grub Customizer
@@ -225,9 +259,12 @@ EOF
         sudo apt update
         sudo apt install -y megasync
     fi
-    sudo apt install -y nautilus-megasync 2>/dev/null || true
     log_success "MEGA instalado."
 fi
+
+log_info "Instalando extensión nautilus-megasync..."
+sudo apt install -y nautilus-megasync 2>/dev/null || true
+log_success "Extensión nautilus-megasync asegurada."
 
 # ------------------------------------------------------------------------------
 # 8. Visual Studio Code

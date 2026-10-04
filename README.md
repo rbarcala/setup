@@ -18,6 +18,8 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
 3. **Spotify**: Instalación vía snap (o repositorio apt como fallback).
 4. **Discord + Vencord**: Descarga e instalación del `.deb` oficial de Discord e inyección automática de Vencord mediante su instalador CLI.
 5. **OBS Studio**: Repositorio oficial PPA (`ppa:obsproject/obs-studio`) para obtener siempre la última versión.
+   - **obs-shaderfilter**: Plugin de Exeldro descargado automáticamente (última release para Ubuntu).
+   - **Wrapper X11 (xcb)**: Se instala un script en `/usr/local/bin/obs` que fuerza a OBS a usar `QT_QPA_PLATFORM=xcb` para asegurar la compatibilidad bajo sesiones Wayland.
 6. **Grub Customizer**: Repositorio PPA oficial (`ppa:danielrichter2007/grub-customizer`).
 7. **MEGA (megasync)**: Repositorio e integración oficial de MEGA con extensión para Nautilus.
 8. **Visual Studio Code**: Repositorio oficial de Microsoft APT con clave GPG dedicada.
