@@ -21,10 +21,12 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
    - **obs-shaderfilter**: Plugin de Exeldro descargado automáticamente (última release para Ubuntu).
    - **Shaders personalizados**: Se instalan automáticamente desde la carpeta `obs-shaders/` del repositorio (Caleidoscopio, Contorno Alfa, Recorte de Esquinas, Bajo el Agua y un parche para Rain Window sin zoom forzado).
    - **Escenas y Recursos (Assets)**: Se incluye un sistema de backup y restauración. Durante la instalación, las escenas (`.json`) y recursos (imágenes, gifs) de la carpeta `obs-config/` se copian automáticamente al sistema (`~/.local/share/obs-assets/`). Las rutas absolutas dentro de los `.json` se reescriben al vuelo para funcionar en la nueva máquina.
-   - **Wayland nativo**: Se clona y parchea el archivo `.desktop` en `~/.local/share/applications` para forzar `QT_QPA_PLATFORM=wayland`. Además, el script limpia automáticamente la geometría de los paneles guardada en `user.ini` para evitar que la UI se rompa por el cambio de X11 a Wayland.
 
 ### 🛠️ Script Auxiliar: `save_obs_to_repo.sh`
 Se incluye el script `save_obs_to_repo.sh` para facilitar las actualizaciones. Si modificás tus escenas en OBS o agregás imágenes/videos nuevos a la carpeta de recursos del sistema (`~/.local/share/obs-assets`), simplemente ejecutá `./save_obs_to_repo.sh` y el script copiará automáticamente la última versión de tus JSON y generará el `.zip` listo para subir a GitHub Releases.
+
+### 🚀 Script Auxiliar: `upload_release.sh`
+Una vez que el script anterior generó tu `obs-assets.zip`, ejecutá `./upload_release.sh`. Este script utiliza la herramienta oficial de GitHub (`gh`) para subir automáticamente el archivo pesado de 300MB a las Releases de tu repositorio sin que tengas que usar el navegador web.
 6. **Grub Customizer**: Repositorio PPA oficial (`ppa:danielrichter2007/grub-customizer`).
 7. **MEGA (megasync)**: Repositorio e integración oficial de MEGA con extensión para Nautilus.
 8. **Visual Studio Code**: Repositorio oficial de Microsoft APT con clave GPG dedicada.
