@@ -1442,62 +1442,6 @@
         },
         {
             "prev_ver": 537001984,
-            "name": "007.png",
-            "uuid": "982a65f9-bd1f-4b43-b53e-e67d565c2f91",
-            "id": "image_source",
-            "versioned_id": "image_source",
-            "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/007.png"
-            },
-            "mixers": 0,
-            "sync": 0,
-            "flags": 0,
-            "volume": 1.0,
-            "balance": 0.5,
-            "enabled": true,
-            "muted": false,
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "hotkeys": {},
-            "deinterlace_mode": 0,
-            "deinterlace_field_order": 0,
-            "monitoring_type": 0,
-            "private_settings": {},
-            "filters": [
-                {
-                    "prev_ver": 537001984,
-                    "name": "User-defined shader",
-                    "uuid": "c29e2829-311e-4bdb-89a3-0d7b79a4736f",
-                    "id": "shader_filter",
-                    "versioned_id": "shader_filter",
-                    "settings": {
-                        "from_file": true,
-                        "override_entire_effect": false,
-                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/rotating-source.shader"
-                    },
-                    "mixers": 0,
-                    "sync": 0,
-                    "flags": 0,
-                    "volume": 1.0,
-                    "balance": 0.5,
-                    "enabled": true,
-                    "muted": false,
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "hotkeys": {},
-                    "deinterlace_mode": 0,
-                    "deinterlace_field_order": 0,
-                    "monitoring_type": 0,
-                    "private_settings": {}
-                }
-            ]
-        },
-        {
-            "prev_ver": 537001984,
             "name": "FUEGO",
             "uuid": "2b387261-3558-4f4f-90eb-35c65220f54a",
             "id": "color_source",
@@ -1535,6 +1479,63 @@
                         "Apply_To_Image": false,
                         "Flame_Size": 1.52,
                         "Spark_Grid_Height": 58.329999999999998
+                    },
+                    "mixers": 0,
+                    "sync": 0,
+                    "flags": 0,
+                    "volume": 1.0,
+                    "balance": 0.5,
+                    "enabled": true,
+                    "muted": false,
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "hotkeys": {},
+                    "deinterlace_mode": 0,
+                    "deinterlace_field_order": 0,
+                    "monitoring_type": 0,
+                    "private_settings": {}
+                }
+            ]
+        },
+        {
+            "prev_ver": 537001984,
+            "name": "007.png",
+            "uuid": "982a65f9-bd1f-4b43-b53e-e67d565c2f91",
+            "id": "image_source",
+            "versioned_id": "image_source",
+            "settings": {
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/007.png",
+                "linear_alpha": false
+            },
+            "mixers": 0,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {},
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {},
+            "filters": [
+                {
+                    "prev_ver": 537001984,
+                    "name": "User-defined shader",
+                    "uuid": "c29e2829-311e-4bdb-89a3-0d7b79a4736f",
+                    "id": "shader_filter",
+                    "versioned_id": "shader_filter",
+                    "settings": {
+                        "from_file": true,
+                        "override_entire_effect": false,
+                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/rotating-source.shader"
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -7053,20 +7054,20 @@
                         "id": 2,
                         "group_item_backup": false,
                         "pos": {
-                            "x": -482.0,
-                            "y": -563.0
+                            "x": -336.0,
+                            "y": -756.0
                         },
                         "pos_rel": {
-                            "x": -2.67037034034729,
-                            "y": -2.0425925254821777
+                            "x": -2.4000000953674316,
+                            "y": -2.4000000953674316
                         },
                         "scale": {
-                            "x": 0.82619047164916992,
-                            "y": 0.82636779546737671
+                            "x": 2.53125,
+                            "y": 2.53125
                         },
                         "scale_rel": {
-                            "x": 0.82619047164916992,
-                            "y": 0.82636779546737671
+                            "x": 2.53125,
+                            "y": 2.53125
                         },
                         "bounds": {
                             "x": 0.0,
@@ -9870,7 +9871,7 @@
     "preview_locked": false,
     "scaling_enabled": true,
     "scaling_level": -15,
-    "scaling_off_x": 0.0,
+    "scaling_off_x": 266.0,
     "scaling_off_y": 0.0,
     "modules": {
         "scripts-tool": [],

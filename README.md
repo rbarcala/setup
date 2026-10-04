@@ -20,6 +20,7 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
 5. **OBS Studio**: Repositorio oficial PPA (`ppa:obsproject/obs-studio`) para obtener siempre la última versión.
    - **obs-shaderfilter**: Plugin de Exeldro descargado automáticamente (última release para Ubuntu).
    - **Shaders personalizados**: Se instalan automáticamente desde la carpeta `obs-shaders/` del repositorio (Caleidoscopio, Contorno Alfa, Recorte de Esquinas, Bajo el Agua y un parche para Rain Window sin zoom forzado).
+   - **Shaders personalizados**: Se instalan automáticamente desde la carpeta `obs-shaders/` del repositorio (Caleidoscopio, Contorno Alfa, Recorte de Esquinas, Bajo el Agua y parches para Rain Window y Spotlight).
    - **Escenas y Recursos (Assets)**: Se incluye un sistema de backup y restauración. Durante la instalación, las escenas (`.json`) y recursos (imágenes, gifs) de la carpeta `obs-config/` se copian automáticamente al sistema (`~/.local/share/obs-assets/`). Las rutas absolutas dentro de los `.json` se reescriben al vuelo para funcionar en la nueva máquina.
 
 ### 🛠️ Script Auxiliar: `save_obs_to_repo.sh`
