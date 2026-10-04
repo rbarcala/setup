@@ -33,7 +33,11 @@ float4 mainImage(VertData v_in) : TARGET
     
     // Buscamos en un radio alrededor del pixel usando una espiral de Fibonacci
     // Esto garantiza un contorno sólido detectando si hay partes opacas cerca
-    for (int i = 1; i <= samples; ++i) {
+    for (int i = 1; i <= 128; ++i) {
+        if (i > samples) {
+            break;
+        }
+        
         float fi = float(i);
         float fsamples = float(samples);
         
