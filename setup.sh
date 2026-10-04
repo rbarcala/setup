@@ -480,6 +480,76 @@ log_info "Actualizando caché de fuentes locales..."
 fc-cache -f -v "$HOME/.local/share/fonts" > /dev/null
 log_success "Caché de fuentes actualizado."
 
+log_info "Configurando interfaz de Firefox (userChrome.css)..."
+killall firefox 2>/dev/null || true
+
+# Localizar perfiles de Firefox (Snap, Nativo, Flatpak)
+PROFILES=$(find ~/snap/firefox/common/.mozilla/firefox ~/.mozilla/firefox ~/.var/app/org.mozilla.firefox/.mozilla/firefox -maxdepth 2 -name "prefs.js" 2>/dev/null | xargs -r -n1 dirname)
+
+for PROFILE in $PROFILES; do
+  mkdir -p "$PROFILE/chrome"
+  
+  # Habilitar el uso de userChrome.css (requerido en versiones modernas de Firefox)
+  USER_JS="$PROFILE/user.js"
+  if ! grep -q "toolkit.legacyUserProfileCustomizations.stylesheets" "$USER_JS" 2>/dev/null; then
+      echo 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >> "$USER_JS"
+  fi
+
+  cat << 'EOF' > "$PROFILE/chrome/userChrome.css"
+/* Configuración de variables */
+:root {
+  --autohide-toolbox-delay: 500ms; /* Tiempo de gracia antes de ocultarse */
+}
+
+/* La barra se fija arriba sin desplazar el contenido */
+#navigator-toolbox {
+  position: fixed !important;
+  display: block !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  background-color: #2b2a33 !important;
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out !important;
+  transition-delay: var(--autohide-toolbox-delay) !important;
+  transform-origin: top !important;
+}
+
+/* Elementos internos sólidos */
+#nav-bar,
+#TabsToolbar,
+#PersonalToolbar,
+#navigator-toolbox > * {
+  background-color: #2b2a33 !important;
+  background-image: none !important;
+}
+
+/* Estado oculto: deja una franja visible en el borde superior para captura segura */
+#navigator-toolbox:not(:hover):not(:focus-within):not([customizing]) {
+  transform: translateY(calc(-100% + 3px)) !important;
+  opacity: 0.01 !important;
+}
+
+/* REGLAS DE APERTURA:
+   1. Al pasar el mouse por el borde (:hover)
+   2. Al enfocar con teclado (Ctrl+L, Ctrl+T)
+   3. MIENTRAS ARRASTRAS UNA PESTAÑA (evita que se cierre en mitad del movimiento)
+   4. Al abrir un menú contextual o desplegable
+*/
+#navigator-toolbox:hover,
+#navigator-toolbox:focus-within,
+#navigator-toolbox[customizing],
+#navigator-toolbox:has([open="true"]),
+#navigator-toolbox:has([movingtab]),
+:root:has([movingtab]) #navigator-toolbox,
+:root[dragover] #navigator-toolbox {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  transition-delay: 0s !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7) !important;
+}
+EOF
+done
+log_success "Configuración de Firefox (auto-ocultar barra) aplicada."
+
 # ------------------------------------------------------------------------------
 # Finalización
 # ------------------------------------------------------------------------------

@@ -39,6 +39,8 @@ Una vez que el script anterior generó tu `obs-assets.zip`, ejecutá `./upload_r
 12. **Fuentes**: 
     - **Microsoft Core Fonts**: Instalación del paquete `ttf-mscorefonts-installer` aceptando el EULA automáticamente, para proveer **Impact**, Arial, Times New Roman, etc.
     - **TrashHand**: Descargada automáticamente desde DaFont e instalada en el directorio local del usuario (`~/.local/share/fonts`).
+13. **Firefox**: 
+    - Auto-configuración de la interfaz (vía `userChrome.css`) para ocultar inteligentemente la barra superior de navegación y pestañas cuando no se usan. Ideal para evitar capturas de pantalla accidentales en OBS.
 
 ## Idempotencia
 
