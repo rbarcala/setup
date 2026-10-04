@@ -202,15 +202,90 @@ else
     fi
 fi
 
-log_info "Configurando wrapper de OBS para forzar QT_QPA_PLATFORM=xcb..."
-sudo tee /usr/local/bin/obs > /dev/null << 'EOF'
-#!/bin/bash
-BIN=$(which -a obs | grep -v "/usr/local/bin/obs" | head -n 1)
-export QT_QPA_PLATFORM=xcb
-exec "$BIN" "$@"
-EOF
-sudo chmod +x /usr/local/bin/obs
-log_success "Wrapper de OBS configurado en /usr/local/bin/obs."
+# Copiar shaders personalizados si existen en el repositorio
+if [ -d "$SCRIPT_DIR/obs-shaders" ]; then
+    log_info "Copiando shaders personalizados a OBS..."
+    mkdir -p "$OBS_PLUGIN_DIR/data/examples"
+    cp "$SCRIPT_DIR/obs-shaders/"*.shader "$OBS_PLUGIN_DIR/data/examples/" 2>/dev/null || true
+    log_success "Shaders personalizados instalados."
+fi
+
+# Instalar configuraciones y escenas de OBS guardadas en el repo
+if [ -d "$SCRIPT_DIR/obs-config" ]; then
+    log_info "Instalando configuraciones, escenas y recursos (assets) de OBS..."
+    
+    # 1. Copiar assets a un lugar estándar del sistema para que no dependa de MEGA/DOCS
+    ASSETS_DEST="$HOME/.local/share/obs-assets"
+    mkdir -p "$ASSETS_DEST"
+    if [ -d "$SCRIPT_DIR/obs-config/assets" ]; then
+        cp -r "$SCRIPT_DIR/obs-config/assets/"* "$ASSETS_DEST/" 2>/dev/null || true
+    fi
+
+    # 2. Copiar escenas y reemplazar las rutas absolutas antiguas por las nuevas
+    mkdir -p "$HOME/.config/obs-studio/basic/scenes"
+    if [ -d "$SCRIPT_DIR/obs-config/scenes" ]; then
+        for scene_file in "$SCRIPT_DIR/obs-config/scenes/"*.json; do
+            if [ -f "$scene_file" ]; then
+                filename=$(basename "$scene_file")
+                DEST_SCENE="$HOME/.config/obs-studio/basic/scenes/$filename"
+                cp "$scene_file" "$DEST_SCENE"
+                
+                # Reemplazar la ruta vieja de los assets (/home/rbarcala/MEGA/DOCS/OBS) por la nueva universal
+                sed -i "s|/home/[^/]*/MEGA/DOCS/OBS|$ASSETS_DEST|g" "$DEST_SCENE"
+                
+                # Reemplazar la ruta vieja del usuario a shaders por la actual ($HOME)
+                sed -i "s|/home/[^/]*/\.config|$HOME/.config|g" "$DEST_SCENE"
+            fi
+        done
+        log_success "Escenas de OBS y rutas instaladas."
+    fi
+fi
+
+
+log_info "Configurando OBS para usar QT_QPA_PLATFORM=wayland nativo..."
+mkdir -p ~/.local/share/applications
+
+# Buscar el archivo .desktop existente de OBS (nativo, flatpak o snap)
+DESKTOP_SRC=""
+for p in \
+    /usr/share/applications/com.obsproject.Studio.desktop \
+    /usr/share/applications/obs-studio.desktop \
+    /var/lib/flatpak/exports/share/applications/com.obsproject.Studio.desktop \
+    ~/.local/share/flatpak/exports/share/applications/com.obsproject.Studio.desktop; do
+    if [ -f "$p" ]; then
+        DESKTOP_SRC="$p"
+        break
+    fi
+done
+
+if [ -z "$DESKTOP_SRC" ]; then
+    DESKTOP_SRC=$(find /usr/share/applications/ -maxdepth 1 -iname "*obs*.desktop" 2>/dev/null | head -n 1)
+fi
+
+if [ -n "$DESKTOP_SRC" ]; then
+    DEST="$HOME/.local/share/applications/$(basename "$DESKTOP_SRC")"
+    cp "$DESKTOP_SRC" "$DEST"
+    sed -i "s|^Exec=\(env QT_QPA_PLATFORM=wayland \)*|Exec=env QT_QPA_PLATFORM=wayland |g" "$DEST"
+    chmod +x "$DEST"
+    update-desktop-database ~/.local/share/applications/ 2>/dev/null || true
+    log_success "Configuración Wayland aplicada en: $DEST"
+else
+    log_warn "No se encontró ningún archivo .desktop de OBS para configurar Wayland."
+fi
+
+# Resetear Layout/UI de OBS automáticamente si existe el user.ini
+if [ -f ~/.config/obs-studio/user.ini ]; then
+    log_info "Restableciendo el layout de OBS (Paneles) para evitar errores de geometría en Wayland..."
+    sed -i '/^geometry=/d; /^geometry2=/d; /^DockState=/d' ~/.config/obs-studio/user.ini
+    log_success "UI de OBS restablecida a su valor por defecto."
+fi
+
+log_warn "NOTA IMPORTANTE SOBRE OBS EN WAYLAND:"
+echo -e "${YELLOW}Al cambiar de X11 a Wayland nativo en Qt6, las posiciones que OBS tenía guardadas${NC}"
+echo -e "${YELLOW}para X11 no coinciden, lo que provoca que se desajusten los paneles.${NC}"
+echo -e "${YELLOW}Si los paneles de Escenas, Fuentes o Controles se ven ocultos o desordenados, hacé lo siguiente:${NC}"
+echo -e "${YELLOW} 1. En el menú superior de OBS hacé clic en 'Docks' (o Paneles).${NC}"
+echo -e "${YELLOW} 2. Seleccioná 'Reset UI' (o Restablecer interfaz).${NC}"
 
 # ------------------------------------------------------------------------------
 # 6. Grub Customizer
@@ -378,6 +453,33 @@ else
     sudo snap install slack || true
     log_success "Slack instalado."
 fi
+
+# ------------------------------------------------------------------------------
+# 12. Fuentes adicionales (Microsoft Core Fonts: Impact, Arial, etc.)
+# ------------------------------------------------------------------------------
+if fc-list | grep -qi "Impact"; then
+    log_success "La fuente Impact (Microsoft Fonts) ya está instalada, saltando."
+else
+    log_info "Instalando fuentes de Microsoft (incluyendo Impact)..."
+    # Aceptar automáticamente el EULA de Microsoft
+    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+    sudo apt install -y ttf-mscorefonts-installer
+fi
+
+if fc-list | grep -qi "TrashHand"; then
+    log_success "La fuente TrashHand ya está instalada, saltando."
+else
+    log_info "Instalando fuente TrashHand..."
+    TRASHHAND_TMP="/tmp/trashhand.zip"
+    curl -sL "https://dl.dafont.com/dl/?f=trashhand" -o "$TRASHHAND_TMP"
+    mkdir -p "$HOME/.local/share/fonts"
+    unzip -o "$TRASHHAND_TMP" -d "$HOME/.local/share/fonts/" > /dev/null
+    rm -f "$TRASHHAND_TMP"
+fi
+
+log_info "Actualizando caché de fuentes locales..."
+fc-cache -f -v "$HOME/.local/share/fonts" > /dev/null
+log_success "Caché de fuentes actualizado."
 
 # ------------------------------------------------------------------------------
 # Finalización

@@ -19,13 +19,21 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
 4. **Discord + Vencord**: Descarga e instalación del `.deb` oficial de Discord e inyección automática de Vencord mediante su instalador CLI.
 5. **OBS Studio**: Repositorio oficial PPA (`ppa:obsproject/obs-studio`) para obtener siempre la última versión.
    - **obs-shaderfilter**: Plugin de Exeldro descargado automáticamente (última release para Ubuntu).
-   - **Wrapper X11 (xcb)**: Se instala un script en `/usr/local/bin/obs` que fuerza a OBS a usar `QT_QPA_PLATFORM=xcb` para asegurar la compatibilidad bajo sesiones Wayland.
+   - **Shaders personalizados**: Se instalan automáticamente desde la carpeta `obs-shaders/` del repositorio (Caleidoscopio, Contorno Alfa, Recorte de Esquinas, Bajo el Agua y un parche para Rain Window sin zoom forzado).
+   - **Escenas y Recursos (Assets)**: Se incluye un sistema de backup y restauración. Durante la instalación, las escenas (`.json`) y recursos (imágenes, gifs) de la carpeta `obs-config/` se copian automáticamente al sistema (`~/.local/share/obs-assets/`). Las rutas absolutas dentro de los `.json` se reescriben al vuelo para funcionar en la nueva máquina.
+   - **Wayland nativo**: Se clona y parchea el archivo `.desktop` en `~/.local/share/applications` para forzar `QT_QPA_PLATFORM=wayland`. Además, el script limpia automáticamente la geometría de los paneles guardada en `user.ini` para evitar que la UI se rompa por el cambio de X11 a Wayland.
+
+### 🛠️ Script Auxiliar: `save_obs_to_repo.sh`
+Se incluye el script `save_obs_to_repo.sh` para facilitar las actualizaciones. Si modificás tus escenas en OBS o agregás imágenes nuevas a tu carpeta original (`MEGA/DOCS/OBS`), simplemente ejecutá `./save_obs_to_repo.sh` y el script copiará automáticamente la última versión de tus JSON y Assets a la carpeta `obs-config/` del repositorio para que puedas subirlos a Git fácilmente.
 6. **Grub Customizer**: Repositorio PPA oficial (`ppa:danielrichter2007/grub-customizer`).
 7. **MEGA (megasync)**: Repositorio e integración oficial de MEGA con extensión para Nautilus.
 8. **Visual Studio Code**: Repositorio oficial de Microsoft APT con clave GPG dedicada.
 9. **Clipboard Indicator**: Extensión de GNOME Shell con hotkey `Super+V` asignada al portapapeles (reemplazando el atajo por defecto del sistema).
 10. **YoutubeController viewer**: Instalación de dependencias de sistema y ejecución de `make install`, limpiando el repositorio descargado tras finalizar.
 11. **Slack**: Instalación vía snap.
+12. **Fuentes**: 
+    - **Microsoft Core Fonts**: Instalación del paquete `ttf-mscorefonts-installer` aceptando el EULA automáticamente, para proveer **Impact**, Arial, Times New Roman, etc.
+    - **TrashHand**: Descargada automáticamente desde DaFont e instalada en el directorio local del usuario (`~/.local/share/fonts`).
 
 ## Idempotencia
 
