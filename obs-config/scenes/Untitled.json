@@ -71,7 +71,7 @@
             "versioned_id": "pipewire-screen-capture-source",
             "settings": {
                 "ShowCursor": false,
-                "RestoreToken": "17a5724e-d0ce-4e68-a3bc-e671e194d10e"
+                "RestoreToken": "bd422179-0872-4bc4-abf1-76a10d226506"
             },
             "mixers": 0,
             "sync": 0,
@@ -204,7 +204,40 @@
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
-            "private_settings": {}
+            "private_settings": {},
+            "filters": [
+                {
+                    "prev_ver": 537001984,
+                    "name": "User-defined shader",
+                    "uuid": "11b3bcd0-6372-48e8-b356-1363b607af8c",
+                    "id": "shader_filter",
+                    "versioned_id": "shader_filter",
+                    "settings": {
+                        "from_file": true,
+                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/recorte_esquinas.shader",
+                        "override_entire_effect": false,
+                        "radio_sup_izq": 0.0,
+                        "radio_inf_izq": 0.29999999999999999,
+                        "radio_inf_der": 0.0
+                    },
+                    "mixers": 0,
+                    "sync": 0,
+                    "flags": 0,
+                    "volume": 1.0,
+                    "balance": 0.5,
+                    "enabled": true,
+                    "muted": false,
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "hotkeys": {},
+                    "deinterlace_mode": 0,
+                    "deinterlace_field_order": 0,
+                    "monitoring_type": 0,
+                    "private_settings": {}
+                }
+            ]
         },
         {
             "prev_ver": 537001984,
@@ -1266,7 +1299,43 @@
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
-            "private_settings": {}
+            "private_settings": {},
+            "filters": [
+                {
+                    "prev_ver": 537001984,
+                    "name": "User-defined shader",
+                    "uuid": "ec8d3a8e-e468-435d-9bc1-25f44ca18d5e",
+                    "id": "shader_filter",
+                    "versioned_id": "shader_filter",
+                    "settings": {
+                        "from_file": true,
+                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/contorno_alfa.shader",
+                        "override_entire_effect": false,
+                        "expand_left": 50,
+                        "expand_right": 50,
+                        "expand_top": 50,
+                        "expand_bottom": 50,
+                        "outline_size": 27.4529,
+                        "samples": 170
+                    },
+                    "mixers": 0,
+                    "sync": 0,
+                    "flags": 0,
+                    "volume": 1.0,
+                    "balance": 0.5,
+                    "enabled": true,
+                    "muted": false,
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "hotkeys": {},
+                    "deinterlace_mode": 0,
+                    "deinterlace_field_order": 0,
+                    "monitoring_type": 0,
+                    "private_settings": {}
+                }
+            ]
         },
         {
             "prev_ver": 537001984,
@@ -2663,21 +2732,15 @@
                         "crop_bottom": 0,
                         "id": 7,
                         "group_item_backup": true,
-                        "pos": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "pos_rel": {
-                            "x": -1.7777777910232544,
-                            "y": -1.0
-                        },
+                        "pos": {},
+                        "pos_rel": {},
                         "scale": {
                             "x": 1.0,
                             "y": 1.0
                         },
                         "scale_rel": {
-                            "x": 0.5,
-                            "y": 0.5
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -2718,21 +2781,15 @@
                         "crop_bottom": 0,
                         "id": 4,
                         "group_item_backup": true,
-                        "pos": {
-                            "x": 1479.5,
-                            "y": 125.43344116210938
-                        },
-                        "pos_rel": {
-                            "x": 0.96203702688217163,
-                            "y": -0.76771587133407593
-                        },
+                        "pos": {},
+                        "pos_rel": {},
                         "scale": {
                             "x": 2.0729410648345947,
                             "y": 2.0735294818878174
                         },
                         "scale_rel": {
-                            "x": 1.0364705324172974,
-                            "y": 1.0367647409439087
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -2773,21 +2830,15 @@
                         "crop_bottom": 0,
                         "id": 5,
                         "group_item_backup": true,
-                        "pos": {
-                            "x": 0.0,
-                            "y": 279.00003051757812
-                        },
-                        "pos_rel": {
-                            "x": -1.7777777910232544,
-                            "y": -0.4833332896232605
-                        },
+                        "pos": {},
+                        "pos_rel": {},
                         "scale": {
                             "x": 6.9268293380737305,
                             "y": 6.9285712242126465
                         },
                         "scale_rel": {
-                            "x": 3.4634146690368652,
-                            "y": 3.4642856121063232
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -3815,11 +3866,11 @@
                         "group_item_backup": true,
                         "pos": {
                             "x": 703.00048828125,
-                            "y": 24.0003662109375
+                            "y": 24.00030517578125
                         },
                         "pos_rel": {
                             "x": -0.4759250283241272,
-                            "y": -0.95555490255355835
+                            "y": -0.95555496215820312
                         },
                         "scale": {
                             "x": 0.81927710771560669,
@@ -3870,11 +3921,11 @@
                         "group_item_backup": true,
                         "pos": {
                             "x": 45.9998779296875,
-                            "y": 209.00003051757812
+                            "y": 208.99993896484375
                         },
                         "pos_rel": {
                             "x": -1.6925928592681885,
-                            "y": -0.61296290159225464
+                            "y": -0.61296308040618896
                         },
                         "scale": {
                             "x": 0.7421875,
@@ -4297,11 +4348,11 @@
                         "group_item_backup": true,
                         "pos": {
                             "x": 1674.0,
-                            "y": 0.0
+                            "y": 233.00006103515625
                         },
                         "pos_rel": {
                             "x": 1.3222222328186035,
-                            "y": -1.0
+                            "y": -0.56851840019226074
                         },
                         "scale": {
                             "x": 2.1964285373687744,
@@ -4351,12 +4402,12 @@
                         "id": 4,
                         "group_item_backup": true,
                         "pos": {
-                            "x": 0.0,
-                            "y": 788.0
+                            "x": 1502.0,
+                            "y": 553.0
                         },
                         "pos_rel": {
-                            "x": -1.7777777910232544,
-                            "y": 0.4592592716217041
+                            "x": 1.0037037134170532,
+                            "y": 0.024074077606201172
                         },
                         "scale": {
                             "x": 0.83935743570327759,
@@ -4573,12 +4624,12 @@
                         "id": 10,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 457.0,
-                            "y": 782.0
+                            "x": 482.0,
+                            "y": 619.0
                         },
                         "pos_rel": {
-                            "x": -0.93148148059844971,
-                            "y": 0.44814813137054443
+                            "x": -0.88518518209457397,
+                            "y": 0.14629626274108887
                         },
                         "scale": {
                             "x": 0.57151937484741211,
@@ -6995,20 +7046,20 @@
                         "id": 5,
                         "group_item_backup": true,
                         "pos": {
-                            "x": 727.9998779296875,
-                            "y": 0.0
+                            "x": 715.0,
+                            "y": 753.0
                         },
                         "pos_rel": {
-                            "x": -0.4296298623085022,
-                            "y": -1.0
+                            "x": -0.45370370149612427,
+                            "y": 0.39444446563720703
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.1631015539169312,
+                            "y": 1.163701057434082
                         },
                         "scale_rel": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.1631015539169312,
+                            "y": 1.163701057434082
                         },
                         "bounds": {
                             "x": 0.0,
@@ -7105,20 +7156,20 @@
                         "id": 8,
                         "group_item_backup": true,
                         "pos": {
-                            "x": 1351.0,
-                            "y": 0.0
+                            "x": 1146.0,
+                            "y": 752.0
                         },
                         "pos_rel": {
-                            "x": 0.72407406568527222,
-                            "y": -1.0
+                            "x": 0.34444445371627808,
+                            "y": 0.39259254932403564
                         },
                         "scale": {
-                            "x": 0.88906252384185791,
-                            "y": 0.88912135362625122
+                            "x": 0.68593752384185791,
+                            "y": 0.68619245290756226
                         },
                         "scale_rel": {
-                            "x": 0.88906252384185791,
-                            "y": 0.88912135362625122
+                            "x": 0.68593752384185791,
+                            "y": 0.68619245290756226
                         },
                         "bounds": {
                             "x": 0.0,
@@ -7313,11 +7364,11 @@
                         "group_item_backup": false,
                         "pos": {
                             "x": 1674.0,
-                            "y": 0.0
+                            "y": 233.00006103515625
                         },
                         "pos_rel": {
                             "x": 1.3222222328186035,
-                            "y": -1.0
+                            "y": -0.56851840019226074
                         },
                         "scale": {
                             "x": 2.1964285373687744,
@@ -7367,12 +7418,12 @@
                         "id": 4,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 0.0,
-                            "y": 788.0
+                            "x": 1502.0,
+                            "y": 553.0
                         },
                         "pos_rel": {
-                            "x": -1.7777777910232544,
-                            "y": 0.4592592716217041
+                            "x": 1.0037037134170532,
+                            "y": 0.024074077606201172
                         },
                         "scale": {
                             "x": 0.83935743570327759,
@@ -7576,11 +7627,11 @@
                         "group_item_backup": false,
                         "pos": {
                             "x": 657.0006103515625,
-                            "y": 6.103515625e-5
+                            "y": 0.0
                         },
                         "pos_rel": {
                             "x": -0.56110996007919312,
-                            "y": -0.99999994039535522
+                            "y": -1.0
                         },
                         "scale": {
                             "x": 0.81927710771560669,
@@ -7631,11 +7682,11 @@
                         "group_item_backup": false,
                         "pos": {
                             "x": 0.0,
-                            "y": 184.99972534179688
+                            "y": 184.9996337890625
                         },
                         "pos_rel": {
                             "x": -1.7777777910232544,
-                            "y": -0.65740793943405151
+                            "y": -0.65740805864334106
                         },
                         "scale": {
                             "x": 0.7421875,
@@ -7690,7 +7741,7 @@
                         },
                         "pos_rel": {
                             "x": 1.0296298265457153,
-                            "y": 0.28703641891479492
+                            "y": 0.28703629970550537
                         },
                         "scale": {
                             "x": 1.0,
@@ -9628,20 +9679,20 @@
                         "id": 5,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 727.9998779296875,
-                            "y": 0.0
+                            "x": 715.0,
+                            "y": 753.0
                         },
                         "pos_rel": {
-                            "x": -0.4296298623085022,
-                            "y": -1.0
+                            "x": -0.45370370149612427,
+                            "y": 0.39444446563720703
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.1631015539169312,
+                            "y": 1.163701057434082
                         },
                         "scale_rel": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.1631015539169312,
+                            "y": 1.163701057434082
                         },
                         "bounds": {
                             "x": 0.0,
@@ -9738,20 +9789,20 @@
                         "id": 8,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 1351.0,
-                            "y": 0.0
+                            "x": 1146.0,
+                            "y": 752.0
                         },
                         "pos_rel": {
-                            "x": 0.72407406568527222,
-                            "y": -1.0
+                            "x": 0.34444445371627808,
+                            "y": 0.39259254932403564
                         },
                         "scale": {
-                            "x": 0.88906252384185791,
-                            "y": 0.88912135362625122
+                            "x": 0.68593752384185791,
+                            "y": 0.68619245290756226
                         },
                         "scale_rel": {
-                            "x": 0.88906252384185791,
-                            "y": 0.88912135362625122
+                            "x": 0.68593752384185791,
+                            "y": 0.68619245290756226
                         },
                         "bounds": {
                             "x": 0.0,
@@ -9858,8 +9909,8 @@
             "name": "Fuego"
         }
     ],
-    "current_scene": "Dormir",
-    "current_program_scene": "Dormir",
+    "current_scene": "CLASE",
+    "current_program_scene": "CLASE",
     "canvases": [],
     "current_transition": "Fade",
     "transition_duration": 300,
@@ -9890,9 +9941,12 @@
     "saved_projectors": [],
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -9,
+    "scaling_level": -8,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
+    "virtual-camera": {
+        "type2": 3
+    },
     "modules": {
         "scripts-tool": [],
         "output-timer": {

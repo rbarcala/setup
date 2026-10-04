@@ -132,19 +132,23 @@ log_info "  2. Journal → Configure Page Template → Background Color: #282a36
 # ------------------------------------------------------------------------------
 # 3. Spotify
 # ------------------------------------------------------------------------------
-if command -v spotify >/dev/null 2>&1 || snap list spotify &>/dev/null; then
+if command -v spotify >/dev/null 2>&1 || dpkg -l | grep -q spotify-client; then
     log_success "Spotify ya está instalado, saltando."
 else
-    log_info "Instalando Spotify..."
-    if command -v snap >/dev/null 2>&1; then
-        sudo snap install spotify || true
-    else
-        sudo mkdir -p /etc/apt/keyrings
-        curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/spotify.gpg
-        echo "deb [signed-by=/etc/apt/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-        sudo apt update
-        sudo apt install -y spotify-client
-    fi
+    log_info "Instalando Spotify (vía APT, evitando Snap)..."
+    sudo mkdir -p /etc/apt/keyrings
+    
+    # 1. Descargamos la llave exacta que está pidiendo Ubuntu desde el servidor oficial
+    gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5384CE82BA52C83A 2>/dev/null
+    gpg --export 5384CE82BA52C83A | sudo tee /etc/apt/keyrings/spotify-latest.gpg > /dev/null
+    
+    # 2. Le decimos al repositorio de Spotify que confíe en esa llave
+    echo "deb [signed-by=/etc/apt/keyrings/spotify-latest.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null
+    
+    # 3. Instalamos
+    sudo apt-get update >/dev/null 2>&1
+    sudo apt-get install spotify-client -y
+    
     log_success "Spotify instalado con éxito."
 fi
 

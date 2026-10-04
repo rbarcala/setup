@@ -15,7 +15,7 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
 2. **Xournal++**: Instalación nativa con soporte para plugins/extensiones Lua y fórmulas LaTeX (`lua5.4`, `lua-lgi`, `dvipng`, etc.).
    - **Pen-GUI-n**: Extensión de interfaz gráfica (incluida en el repo o descargada desde GitHub).
    - **Dracula theme**: Paleta de colores y toolbar Dracula. Requiere activación manual en Xournal++ (*View → Toolbars → Dracula* y color de fondo `#282a36`).
-3. **Spotify**: Instalación vía snap (o repositorio apt como fallback).
+3. **Spotify**: Instalación oficial vía APT (agregando la llave GPG manualmente para evitar problemas de firmas y evadiendo Snap).
 4. **Discord + Vencord**: Descarga e instalación del `.deb` oficial de Discord e inyección automática de Vencord mediante su instalador CLI.
 5. **OBS Studio**: Repositorio oficial PPA (`ppa:obsproject/obs-studio`) para obtener siempre la última versión.
    - **obs-shaderfilter**: Plugin de Exeldro descargado automáticamente (última release para Ubuntu).
