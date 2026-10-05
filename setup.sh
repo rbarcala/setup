@@ -400,45 +400,37 @@ if command -v youtube-stream-controller >/dev/null 2>&1 || dpkg -s youtube-strea
     log_success "Youtube Playlist / Viewer Controller ya está instalado, saltando."
 else
     log_info "Instalando dependencias de Youtube Playlist/Viewer Controller..."
-    sudo apt install -y python3-flask yt-dlp python3-requests python3-qrcode gir1.2-gtk-3.0 gir1.2-webkit2-4.1 ffmpeg xdotool wmctrl python3-venv || log_warn "Aviso instalando dependencias de Youtube Controller."
+    sudo apt install -y python3-flask yt-dlp python3-requests python3-qrcode gir1.2-gtk-3.0 gir1.2-webkit2-4.1 ffmpeg xdotool wmctrl python3-venv python3-pyqt5 python3-pyqt5.qtwebengine || log_warn "Aviso instalando dependencias de Youtube Controller."
 
-    CONTROLLER_TEMP_DIR=""
-
-    # Verificar si el repo ya está en la misma carpeta o adyacente, de lo contrario clonarlo temporalmente
+    # Si el repo ya existe adyacente, usarlo; de lo contrario alojarlo permanentemente en ~/.local/share/
+    CONTROLLER_INSTALL_DIR="$HOME/.local/share/youtube-stream-controller"
     if [ -d "$SCRIPT_DIR/YoutubePlaylist-ViewerController" ]; then
         CONTROLLER_SRC="$SCRIPT_DIR/YoutubePlaylist-ViewerController"
-        DELETE_AFTER_INSTALL=false
     elif [ -d "$SCRIPT_DIR/../YoutubePlaylist-ViewerController" ]; then
         CONTROLLER_SRC="$SCRIPT_DIR/../YoutubePlaylist-ViewerController"
-        DELETE_AFTER_INSTALL=false
+    elif [ -d "$CONTROLLER_INSTALL_DIR" ]; then
+        CONTROLLER_SRC="$CONTROLLER_INSTALL_DIR"
+        log_info "Actualizando Youtube Playlist Controller en $CONTROLLER_SRC..."
+        git -C "$CONTROLLER_SRC" pull || true
     else
-        CONTROLLER_TEMP_DIR="$(mktemp -d /tmp/youtube-stream-controller-XXXXXX)"
-        log_info "Descargando Youtube Playlist Controller a $CONTROLLER_TEMP_DIR..."
-        if git clone https://github.com/rbarcala/YoutubePlaylist-ViewerController.git "$CONTROLLER_TEMP_DIR" 2>/dev/null; then
-            CONTROLLER_SRC="$CONTROLLER_TEMP_DIR"
-            DELETE_AFTER_INSTALL=true
-        else
-            log_warn "No se pudo clonar el repositorio de Youtube Playlist Controller."
-            CONTROLLER_SRC=""
-        fi
+        CONTROLLER_SRC="$CONTROLLER_INSTALL_DIR"
+        log_info "Clonando Youtube Playlist Controller en $CONTROLLER_SRC..."
+        mkdir -p "$(dirname "$CONTROLLER_SRC")"
+        git clone https://github.com/rbarcala/YoutubePlaylist-ViewerController.git "$CONTROLLER_SRC" || log_warn "No se pudo clonar el repositorio de Youtube Playlist Controller."
     fi
 
     if [ -n "$CONTROLLER_SRC" ] && [ -d "$CONTROLLER_SRC" ]; then
-        log_info "Ejecutando instalación en $CONTROLLER_SRC..."
+        log_info "Ejecutando make install en $CONTROLLER_SRC..."
         (
             cd "$CONTROLLER_SRC" || exit 1
-            make install 2>/dev/null || sudo make install 2>/dev/null || true
-            if [ -f "release/youtube-stream-controller_1.0.0_all.deb" ]; then
-                sudo apt install -y ./release/youtube-stream-controller_1.0.0_all.deb 2>/dev/null || true
-            fi
+            make install
         )
 
-        if [ "$DELETE_AFTER_INSTALL" = true ] && [ -n "$CONTROLLER_TEMP_DIR" ] && [ -d "$CONTROLLER_TEMP_DIR" ]; then
-            log_info "Eliminando repositorio temporal descargado ($CONTROLLER_TEMP_DIR)..."
-            rm -rf "$CONTROLLER_TEMP_DIR"
+        if command -v youtube-stream-controller >/dev/null 2>&1 || [ -f "$HOME/.local/bin/youtube-stream-controller" ]; then
+            log_success "YouTube Stream Controller instalado exitosamente (make install)."
+        else
+            log_warn "No se pudo verificar la presencia del ejecutable de YouTube Stream Controller."
         fi
-
-        log_success "Youtube Playlist / Viewer Controller procesado."
     fi
 fi
 
