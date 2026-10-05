@@ -71,7 +71,7 @@
             "versioned_id": "pipewire-screen-capture-source",
             "settings": {
                 "ShowCursor": false,
-                "RestoreToken": "bd422179-0872-4bc4-abf1-76a10d226506"
+                "RestoreToken": "5ca65e01-049d-4800-aa62-c1f712be1dab"
             },
             "mixers": 0,
             "sync": 0,
@@ -100,8 +100,8 @@
                 "url": "http://localhost:8000/overlay.html",
                 "width": 1920,
                 "height": 1080,
-                "shutdown": false,
-                "restart_when_active": false,
+                "shutdown": true,
+                "restart_when_active": true,
                 "css": "body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }",
                 "reroute_audio": false
             },
@@ -135,7 +135,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Angelical/ANGELICAL.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Angelical/ANGELICAL.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -161,7 +162,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Sad/PEPEBAILANDO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Sad/PEPEBAILANDO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -187,7 +189,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Sad/PEPELLUVIA.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Sad/PEPELLUVIA.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -246,7 +249,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Sad/PIKACHULLORANDO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Sad/PIKACHULLORANDO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -306,7 +310,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Sad/WOJACKSAD.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Sad/WOJACKSAD.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -366,7 +371,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/BANANA.png"
+                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/BANANA.png",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -392,7 +398,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/DURMIENDOZZZ.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/DURMIENDOZZZ.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -418,7 +425,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/MONODORMIDO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/MONODORMIDO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -478,7 +486,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/MONODORMIDO2.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/MONODORMIDO2.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -507,10 +516,10 @@
                         "from_file": true,
                         "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/recorte_esquinas.shader",
                         "override_entire_effect": false,
-                        "radio_sup_der": 0.0,
                         "radio_sup_izq": 0.0,
-                        "radio_inf_der": 0.20000000000000001,
-                        "radio_inf_izq": 0.0
+                        "radio_sup_der": 0.0,
+                        "radio_inf_izq": 0.0,
+                        "radio_inf_der": 0.20000000000000001
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -538,7 +547,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/ZZZ.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Dormido/ZZZ.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -595,7 +605,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Sad/SAD.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Sad/SAD.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -621,7 +632,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Mexicano/ESQUELETO.jpg"
+                "file": "/home/rbarcala/.local/share/obs-assets/Mexicano/ESQUELETO.jpg",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -647,7 +659,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Mexicano/PEPOMEXICANO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Mexicano/PEPOMEXICANO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -673,7 +686,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/My beloved/ARTHUR MORGAN.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/My beloved/ARTHUR MORGAN.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -702,8 +716,8 @@
                         "from_file": true,
                         "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/recorte_esquinas.shader",
                         "override_entire_effect": false,
-                        "radio_sup_der": 0.0,
-                        "radio_sup_izq": 0.0
+                        "radio_sup_izq": 0.0,
+                        "radio_sup_der": 0.0
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -731,7 +745,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/My beloved/CORAZON.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/My beloved/CORAZON.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -758,7 +773,9 @@
             "versioned_id": "ffmpeg_source",
             "settings": {
                 "local_file": "/home/rbarcala/.local/share/obs-assets/My beloved/CORAZONES.mp4",
-                "looping": true
+                "close_when_inactive": true,
+                "looping": true,
+                "restart_on_activate": true
             },
             "mixers": 255,
             "sync": 0,
@@ -825,7 +842,9 @@
             "versioned_id": "ffmpeg_source",
             "settings": {
                 "local_file": "/home/rbarcala/.local/share/obs-assets/Mexicano/CONFETI.mp4",
-                "looping": true
+                "close_when_inactive": true,
+                "looping": true,
+                "restart_on_activate": true
             },
             "mixers": 255,
             "sync": 0,
@@ -886,7 +905,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/CIRCULO.png"
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/CIRCULO.png",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -912,7 +932,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/PELADOS.png"
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/PELADOS.png",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -938,7 +959,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/MONOMUSICA.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/MONOMUSICA.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -967,8 +989,8 @@
                         "from_file": true,
                         "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/recorte_esquinas.shader",
                         "override_entire_effect": false,
-                        "radio_sup_der": 0.0,
-                        "radio_sup_izq": 0.0
+                        "radio_sup_izq": 0.0,
+                        "radio_sup_der": 0.0
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -1023,7 +1045,9 @@
             "versioned_id": "ffmpeg_source",
             "settings": {
                 "local_file": "/home/rbarcala/.local/share/obs-assets/Misc/LIGHTRAYS.mp4",
-                "looping": true
+                "close_when_inactive": true,
+                "looping": true,
+                "restart_on_activate": true
             },
             "mixers": 255,
             "sync": 0,
@@ -1058,7 +1082,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/ALARMA.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/ALARMA.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1084,7 +1109,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/DEMO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/DEMO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1110,7 +1136,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/DISCOBALL.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/DISCOBALL.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1136,7 +1163,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/GATOBAILE.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/GATOBAILE.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1162,7 +1190,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/GMOD.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/GMOD.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1188,7 +1217,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/KIRBY.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/KIRBY.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1214,7 +1244,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/PABLO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/PABLO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1240,7 +1271,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/PERRO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/PERRO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1266,7 +1298,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/PINGUINO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/PINGUINO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1292,7 +1325,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/RATA.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/RATA.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1318,7 +1352,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Baile/STEVE.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Baile/STEVE.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1345,7 +1380,9 @@
             "versioned_id": "ffmpeg_source",
             "settings": {
                 "local_file": "/home/rbarcala/.local/share/obs-assets/Misc/NARUTO.mp4",
-                "looping": true
+                "close_when_inactive": true,
+                "looping": true,
+                "restart_on_activate": true
             },
             "mixers": 255,
             "sync": 0,
@@ -1408,7 +1445,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/THISISFINE.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/THISISFINE.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1698,6 +1736,7 @@
             "versioned_id": "image_source",
             "settings": {
                 "file": "/home/rbarcala/.local/share/obs-assets/Misc/007.png",
+                "unload": true,
                 "linear_alpha": false
             },
             "mixers": 0,
@@ -1754,7 +1793,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/ASCENDER.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/ASCENDER.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1780,7 +1820,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/FLOTAR.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/FLOTAR.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1806,7 +1847,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/HOMERO.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/HOMERO.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1862,7 +1904,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/VOLAR.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Flotando/VOLAR.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1888,7 +1931,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "file": "/home/rbarcala/.local/share/obs-assets/Misc/JAKESAYINGGOODBYE.gif"
+                "file": "/home/rbarcala/.local/share/obs-assets/Misc/JAKESAYINGGOODBYE.gif",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -2984,21 +3028,15 @@
                         "crop_bottom": 0,
                         "id": 7,
                         "group_item_backup": true,
-                        "pos": {
-                            "x": 14.64202880859375,
-                            "y": 3.92156982421875
-                        },
-                        "pos_rel": {
-                            "x": -1.7506629228591919,
-                            "y": -0.99273788928985596
-                        },
+                        "pos": {},
+                        "pos_rel": {},
                         "scale": {
                             "x": 1.0,
                             "y": 1.0
                         },
                         "scale_rel": {
-                            "x": 0.48626741766929626,
-                            "y": 0.48626741766929626
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -3039,21 +3077,15 @@
                         "crop_bottom": 0,
                         "id": 4,
                         "group_item_backup": true,
-                        "pos": {
-                            "x": 1490.89599609375,
-                            "y": 325.404052734375
-                        },
-                        "pos_rel": {
-                            "x": 0.98314070701599121,
-                            "y": -0.39739990234375
-                        },
+                        "pos": {},
+                        "pos_rel": {},
                         "scale": {
                             "x": 2.0729410648345947,
                             "y": 2.0735294818878174
                         },
                         "scale_rel": {
-                            "x": 1.0080037117004395,
-                            "y": 1.0082899332046509
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -3094,21 +3126,15 @@
                         "crop_bottom": 0,
                         "id": 5,
                         "group_item_backup": true,
-                        "pos": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "pos_rel": {
-                            "x": -1.7777777910232544,
-                            "y": -1.0
-                        },
+                        "pos": {},
+                        "pos_rel": {},
                         "scale": {
                             "x": 6.9268293380737305,
                             "y": 6.9285712242126465
                         },
                         "scale_rel": {
-                            "x": 3.3682916164398193,
-                            "y": 3.3691384792327881
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -7133,10 +7159,10 @@
             "push-to-talk-delay": 0,
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
-                "libobs.show_scene_item.2": [],
-                "libobs.hide_scene_item.2": [],
                 "libobs.show_scene_item.3": [],
-                "libobs.hide_scene_item.3": []
+                "libobs.hide_scene_item.3": [],
+                "libobs.show_scene_item.2": [],
+                "libobs.hide_scene_item.2": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
@@ -7796,7 +7822,7 @@
                             "y": 1080.0
                         },
                         "align": 5,
-                        "bounds_type": 0,
+                        "bounds_type": 1,
                         "bounds_align": 0,
                         "bounds_crop": false,
                         "crop_left": 0,
@@ -7822,12 +7848,12 @@
                             "y": 1.0
                         },
                         "bounds": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 1920.0,
+                            "y": 1080.0
                         },
                         "bounds_rel": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 3.5555555820465088,
+                            "y": 2.0
                         },
                         "scale_filter": "disable",
                         "blend_method": "default",
@@ -10477,10 +10503,10 @@
             "name": "CLASE"
         },
         {
-            "name": "PROFE"
+            "name": "SCREAMER"
         },
         {
-            "name": "SCREAMER"
+            "name": "PROFE"
         },
         {
             "name": "SE FUE EL PROFE"
@@ -10534,11 +10560,11 @@
             "name": "Fuego"
         }
     ],
-    "current_scene": "SCREAMER",
-    "current_program_scene": "SCREAMER",
+    "current_scene": "CLASE",
+    "current_program_scene": "CLASE",
     "canvases": [],
     "current_transition": "Fade",
-    "transition_duration": 300,
+    "transition_duration": 150,
     "transitions": [],
     "quick_transitions": [
         {
