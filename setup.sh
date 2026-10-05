@@ -499,10 +499,11 @@ else
 
       cat << 'INEOF' > "$PROFILE/chrome/userChrome.css"
 :root {
-  --autohide-toolbox-delay: 400ms;
+  --autohide-toolbox-delay: 1500ms; /* 1.5 segundos antes de replegarse */
   --autohide-trigger-height: 8px;
 }
 
+/* 1. ESTADO BASE: Oculto arriba con margen sensible */
 #navigator-toolbox {
   position: fixed !important;
   display: block !important;
@@ -517,6 +518,7 @@ else
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45) !important;
 }
 
+/* Fondos sólidos */
 #nav-bar,
 #TabsToolbar,
 #PersonalToolbar,
@@ -525,6 +527,15 @@ else
   background-image: none !important;
 }
 
+/* Ocultar barra de direcciones y elementos flotantes mientras la barra está recogida */
+#navigator-toolbox:not(:hover):not(:focus-within) :is(#urlbar, #urlbar-container, #urlbar-background, .urlbarView, #searchbar, #navigator-toolbox > *) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.1s ease, visibility 0.1s !important;
+}
+
+/* 2. REGLAS DE APERTURA: Despliegue inmediato al pasar el ratón o enfocar */
 #navigator-toolbox:hover,
 #navigator-toolbox:active,
 #navigator-toolbox:has(:active),
@@ -539,6 +550,12 @@ else
 :root[dragover] #navigator-toolbox {
   transform: translate3d(0, 0, 0) !important;
   transition-delay: 0s !important;
+}
+
+#navigator-toolbox:is(:hover, :active, :focus-within, [customizing]) :is(#urlbar, #urlbar-container, #urlbar-background, .urlbarView, #searchbar, #navigator-toolbox > *) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 INEOF
     done
