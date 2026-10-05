@@ -2,33 +2,33 @@ uniform float radio_sup_izq <
     string name = "Superior Izquierda";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 0.5;
-    float step = 0.001;
-> = 0.1;
+    float max = 50.0;
+    float step = 0.1;
+> = 0.0;
 
 uniform float radio_sup_der <
     string name = "Superior Derecha";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 0.5;
-    float step = 0.001;
-> = 0.1;
+    float max = 50.0;
+    float step = 0.1;
+> = 0.0;
 
 uniform float radio_inf_izq <
     string name = "Inferior Izquierda";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 0.5;
-    float step = 0.001;
-> = 0.1;
+    float max = 50.0;
+    float step = 0.1;
+> = 0.0;
 
 uniform float radio_inf_der <
     string name = "Inferior Derecha";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 0.5;
-    float step = 0.001;
-> = 0.1;
+    float max = 50.0;
+    float step = 0.1;
+> = 0.0;
 
 uniform bool diagonal <
     string name = "Corte Diagonal (marcado) / Redondo (desmarcado)";
@@ -41,10 +41,10 @@ float4 mainImage(VertData v_in) : TARGET
     
     // Usamos la dimensión menor para que el % del radio sea proporcional y circular
     float min_dim = min(uv_size.x, uv_size.y);
-    float r_tl = radio_sup_izq * min_dim;
-    float r_tr = radio_sup_der * min_dim;
-    float r_bl = radio_inf_izq * min_dim;
-    float r_br = radio_inf_der * min_dim;
+    float r_tl = (radio_sup_izq * 0.01) * min_dim;
+    float r_tr = (radio_sup_der * 0.01) * min_dim;
+    float r_bl = (radio_inf_izq * 0.01) * min_dim;
+    float r_br = (radio_inf_der * 0.01) * min_dim;
     
     float alpha_mult = 1.0;
     
