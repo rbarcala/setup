@@ -484,6 +484,9 @@ log_info "Actualizando caché de fuentes locales..."
 fc-cache -f -v "$HOME/.local/share/fonts" > /dev/null
 log_success "Caché de fuentes actualizado."
 
+# Definir log_info como fallback si no existe en el entorno
+type log_info &>/dev/null || log_info() { echo -e "\033[1;34m[INFO]\033[0m $*"; }
+
 log_info "Configurando interfaz de Firefox (userChrome.css)..."
 killall firefox 2>/dev/null || true
 
@@ -493,31 +496,34 @@ PROFILES=$(find ~/snap/firefox/common/.mozilla/firefox ~/.mozilla/firefox ~/.var
 for PROFILE in $PROFILES; do
   mkdir -p "$PROFILE/chrome"
   
-  # Habilitar el uso de userChrome.css (requerido en versiones modernas de Firefox)
+  # Habilitar el uso de userChrome.css
   USER_JS="$PROFILE/user.js"
   if ! grep -q "toolkit.legacyUserProfileCustomizations.stylesheets" "$USER_JS" 2>/dev/null; then
       echo 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >> "$USER_JS"
   fi
 
-  cat << 'EOF' > "$PROFILE/chrome/userChrome.css"
-/* Configuración de variables */
+  cat << 'INEOF' > "$PROFILE/chrome/userChrome.css"
 :root {
-  --autohide-toolbox-delay: 500ms; /* Tiempo de gracia antes de ocultarse */
+  --autohide-toolbox-delay: 400ms; /* Tiempo antes de replegarse */
+  --autohide-trigger-height: 8px;  /* Grosor del área sensible (probá con 8px, 10px o 12px) */
 }
 
-/* La barra se fija arriba sin desplazar el contenido */
+/* 1. ESTADO BASE: Oculto con margen sensible ampliado y acelerado por GPU */
 #navigator-toolbox {
   position: fixed !important;
   display: block !important;
   width: 100% !important;
   z-index: 1000 !important;
   background-color: #2b2a33 !important;
-  transition: transform 0.15s ease-out, opacity 0.15s ease-out !important;
-  transition-delay: var(--autohide-toolbox-delay) !important;
   transform-origin: top !important;
+  transform: translate3d(0, calc(-100% + var(--autohide-trigger-height)), 0) !important;
+  will-change: transform !important;
+  transition: transform 0.12s cubic-bezier(0, 0, 0.2, 1) !important;
+  transition-delay: var(--autohide-toolbox-delay) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45) !important;
 }
 
-/* Elementos internos sólidos */
+/* Fondos sólidos para evitar mezcla de transparencias pesadas */
 #nav-bar,
 #TabsToolbar,
 #PersonalToolbar,
@@ -526,31 +532,23 @@ for PROFILE in $PROFILES; do
   background-image: none !important;
 }
 
-/* Estado oculto: deja una franja visible en el borde superior para captura segura */
-#navigator-toolbox:not(:hover):not(:focus-within):not([customizing]) {
-  transform: translateY(calc(-100% + 3px)) !important;
-  opacity: 0.01 !important;
-}
-
-/* REGLAS DE APERTURA:
-   1. Al pasar el mouse por el borde (:hover)
-   2. Al enfocar con teclado (Ctrl+L, Ctrl+T)
-   3. MIENTRAS ARRASTRAS UNA PESTAÑA (evita que se cierre en mitad del movimiento)
-   4. Al abrir un menú contextual o desplegable
-*/
+/* 2. REGLAS DE APERTURA: Despliegue inmediato al detectar el cursor */
 #navigator-toolbox:hover,
+#navigator-toolbox:active,
+#navigator-toolbox:has(:active),
 #navigator-toolbox:focus-within,
 #navigator-toolbox[customizing],
 #navigator-toolbox:has([open="true"]),
 #navigator-toolbox:has([movingtab]),
+#navigator-toolbox:has([dragover]),
+#navigator-toolbox[dragover],
 :root:has([movingtab]) #navigator-toolbox,
+:root:has([dragover]) #navigator-toolbox,
 :root[dragover] #navigator-toolbox {
-  transform: translateY(0) !important;
-  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
   transition-delay: 0s !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7) !important;
 }
-EOF
+INEOF
 done
 log_success "Configuración de Firefox (auto-ocultar barra) aplicada."
 
