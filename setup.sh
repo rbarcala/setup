@@ -478,88 +478,38 @@ fc-cache -f -v "$HOME/.local/share/fonts" > /dev/null 2>&1 || true
 log_success "Caché de fuentes actualizado."
 
 # ------------------------------------------------------------------------------
-# 13. Firefox (userChrome.css)
+# 13. Firefox (Modo Compacto)
 # ------------------------------------------------------------------------------
-log_info "Configurando interfaz de Firefox (userChrome.css)..."
-killall firefox 2>/dev/null || true
+log_info "Configurando modo compacto en Firefox..."
 
 PROFILES=$(find ~/snap/firefox/common/.mozilla/firefox ~/.mozilla/firefox ~/.var/app/org.mozilla.firefox/.mozilla/firefox -maxdepth 2 -name "prefs.js" 2>/dev/null | xargs -r -n1 dirname || true)
 
 if [ -z "$PROFILES" ]; then
     log_warn "No se encontraron perfiles existentes de Firefox (aún no se abrió el navegador por primera vez)."
-    log_info "Abre Firefox una vez y vuelve a correr el script para aplicar el auto-ocultado de barra."
+    log_info "Abre Firefox una vez y vuelve a correr el script para aplicar el modo compacto."
 else
     for PROFILE in $PROFILES; do
-      mkdir -p "$PROFILE/chrome"
-      
       USER_JS="$PROFILE/user.js"
-      if ! grep -q "toolkit.legacyUserProfileCustomizations.stylesheets" "$USER_JS" 2>/dev/null; then
-          echo 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >> "$USER_JS"
+      touch "$USER_JS"
+
+      # Habilitar opción de modo compacto
+      if ! grep -q "browser.compactmode.show" "$USER_JS" 2>/dev/null; then
+          echo 'user_pref("browser.compactmode.show", true);' >> "$USER_JS"
       fi
 
-      cat << 'INEOF' > "$PROFILE/chrome/userChrome.css"
-:root {
-  --autohide-toolbox-delay: 1500ms; /* 1.5 segundos antes de replegarse */
-  --autohide-trigger-height: 8px;
-}
+      # Activar densidad compacta (1 = Compacto)
+      if ! grep -q "browser.uidensity" "$USER_JS" 2>/dev/null; then
+          echo 'user_pref("browser.uidensity", 1);' >> "$USER_JS"
+      else
+          sed -i 's/user_pref("browser.uidensity", [0-9]);/user_pref("browser.uidensity", 1);/g' "$USER_JS"
+      fi
 
-/* 1. ESTADO BASE: Oculto arriba con margen sensible */
-#navigator-toolbox {
-  position: fixed !important;
-  display: block !important;
-  width: 100% !important;
-  z-index: 1000 !important;
-  background-color: #2b2a33 !important;
-  transform-origin: top !important;
-  transform: translate3d(0, calc(-100% + var(--autohide-trigger-height)), 0) !important;
-  will-change: transform !important;
-  transition: transform 0.12s cubic-bezier(0, 0, 0.2, 1) !important;
-  transition-delay: var(--autohide-toolbox-delay) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45) !important;
-}
-
-/* Fondos sólidos */
-#nav-bar,
-#TabsToolbar,
-#PersonalToolbar,
-#navigator-toolbox > * {
-  background-color: #2b2a33 !important;
-  background-image: none !important;
-}
-
-/* Ocultar barra de direcciones y elementos flotantes mientras la barra está recogida */
-#navigator-toolbox:not(:hover):not(:focus-within) :is(#urlbar, #urlbar-container, #urlbar-background, .urlbarView, #searchbar, #navigator-toolbox > *) {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  transition: opacity 0.1s ease, visibility 0.1s !important;
-}
-
-/* 2. REGLAS DE APERTURA: Despliegue inmediato al pasar el ratón o enfocar */
-#navigator-toolbox:hover,
-#navigator-toolbox:active,
-#navigator-toolbox:has(:active),
-#navigator-toolbox:focus-within,
-#navigator-toolbox[customizing],
-#navigator-toolbox:has([open="true"]),
-#navigator-toolbox:has([movingtab]),
-#navigator-toolbox:has([dragover]),
-#navigator-toolbox[dragover],
-:root:has([movingtab]) #navigator-toolbox,
-:root:has([dragover]) #navigator-toolbox,
-:root[dragover] #navigator-toolbox {
-  transform: translate3d(0, 0, 0) !important;
-  transition-delay: 0s !important;
-}
-
-#navigator-toolbox:is(:hover, :active, :focus-within, [customizing]) :is(#urlbar, #urlbar-container, #urlbar-background, .urlbarView, #searchbar, #navigator-toolbox > *) {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-}
-INEOF
+      # Eliminar personalizaciones CSS previas si existieran
+      sed -i '/toolkit.legacyUserProfileCustomizations.stylesheets/d' "$USER_JS" 2>/dev/null || true
+      rm -f "$PROFILE/chrome/userChrome.css" 2>/dev/null || true
+      rmdir "$PROFILE/chrome" 2>/dev/null || true
     done
-    log_success "Configuración de Firefox (auto-ocultar barra) aplicada."
+    log_success "Modo compacto de Firefox configurado con éxito."
 fi
 
 # ------------------------------------------------------------------------------
