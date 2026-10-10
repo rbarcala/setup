@@ -36,6 +36,8 @@ uniform float mezcla_luces <
     float min = 0.0;
     float max = 1.0;
     float step = 0.05;
+> = 0.4;
+
 uniform float beat_offset <
     string name = "Calibración de Fase (Desfase)";
     string widget_type = "slider";

@@ -44,6 +44,8 @@ uniform float resplandor_arcoiris <
     float min = 0.0;
     float max = 1.5;
     float step = 0.1;
+> = 0.8;
+
 uniform float beat_offset <
     string name = "Calibración de Fase (Desfase)";
     string widget_type = "slider";

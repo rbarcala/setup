@@ -52,6 +52,8 @@ uniform int modo_mezcla <
     int min = 0;
     int max = 2;
     int step = 1;
+> = 1;
+
 uniform float beat_offset <
     string name = "Calibración de Fase (Desfase)";
     string widget_type = "slider";

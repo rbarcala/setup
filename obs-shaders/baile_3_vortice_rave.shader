@@ -36,6 +36,8 @@ uniform float velocidad_color <
     float min = 0.5;
     float max = 8.0;
     float step = 0.5;
+> = 2.0;
+
 uniform float beat_offset <
     string name = "Calibración de Fase (Desfase)";
     string widget_type = "slider";
