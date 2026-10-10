@@ -1,10 +1,18 @@
-uniform float velocidad_giro <
-    string name = "Velocidad de Giro / Túnel";
+uniform float bpm <
+    string name = "Ritmo (BPM)";
     string widget_type = "slider";
-    float min = 0.5;
-    float max = 10.0;
-    float step = 0.5;
-> = 3.0;
+    float min = 40.0;
+    float max = 240.0;
+    float step = 1.0;
+> = 128.0;
+
+uniform float velocidad_giro <
+    string name = "Multiplicador de Giro";
+    string widget_type = "slider";
+    float min = 0.2;
+    float max = 4.0;
+    float step = 0.1;
+> = 1.0;
 
 uniform float efecto_tunel <
     string name = "Profundidad del Túnel (Vórtice)";
@@ -28,7 +36,13 @@ uniform float velocidad_color <
     float min = 0.5;
     float max = 8.0;
     float step = 0.5;
-> = 3.5;
+uniform float beat_offset <
+    string name = "Calibración de Fase (Desfase)";
+    string widget_type = "slider";
+    float min = -100.0;
+    float max = 100.0;
+    float step = 0.01;
+> = 0.0;
 
 float3 rainbow_cycle(float h)
 {
@@ -47,8 +61,10 @@ float4 mainImage(VertData v_in) : TARGET
     float r = length(p);
     float a = atan2(p.y, p.x);
 
-    // Deformación polar de túnel / vórtice
-    float tunnel_angle = a + (r * efecto_tunel * 3.0) + (elapsed_time * velocidad_giro);
+    // Deformación polar de túnel / vórtice al ritmo de la música en fase
+    float synced_time = elapsed_time + beat_offset;
+    float spin_speed = (bpm / 60.0) * velocidad_giro * 1.5;
+    float tunnel_angle = a + (r * efecto_tunel * 3.0) + (synced_time * spin_speed);
     float2 tunnel_p = float2(cos(tunnel_angle), sin(tunnel_angle)) * r;
     tunnel_p.x /= aspect;
     float2 warped_uv = 0.5 + tunnel_p;

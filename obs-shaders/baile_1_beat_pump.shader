@@ -30,13 +30,22 @@ uniform float vineta_disco <
     float step = 0.05;
 > = 0.4;
 
+uniform float beat_offset <
+    string name = "Calibración de Fase (Desfase)";
+    string widget_type = "slider";
+    float min = -100.0;
+    float max = 100.0;
+    float step = 0.01;
+> = 0.0;
+
 float4 mainImage(VertData v_in) : TARGET
 {
     float2 uv = v_in.uv;
 
-    // Frecuencia del compás según BPM (128 BPM común en electrónica/dance)
+    // Frecuencia del compás según BPM calibrado en fase con Spotify
     float bps = bpm / 60.0;
-    float beat_phase = frac(elapsed_time * bps);
+    float synced_time = elapsed_time + beat_offset;
+    float beat_phase = frac(synced_time * bps);
 
     // Curva de decaimiento exponencial estilo kick de bombo (golpe fuerte y cae)
     float beat_kick = exp(-beat_phase * 6.0);

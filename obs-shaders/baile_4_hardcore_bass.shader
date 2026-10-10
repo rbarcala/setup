@@ -1,10 +1,18 @@
-uniform float velocidad_locura <
-    string name = "Velocidad Extrema / Caos";
+uniform float bpm <
+    string name = "Ritmo (BPM)";
     string widget_type = "slider";
-    float min = 1.0;
-    float max = 20.0;
-    float step = 0.5;
-> = 8.0;
+    float min = 40.0;
+    float max = 240.0;
+    float step = 1.0;
+> = 128.0;
+
+uniform float velocidad_locura <
+    string name = "Multiplicador de Caos";
+    string widget_type = "slider";
+    float min = 0.5;
+    float max = 5.0;
+    float step = 0.1;
+> = 2.0;
 
 uniform float temblor_pantalla <
     string name = "Terremoto / Screen Shake";
@@ -36,7 +44,13 @@ uniform float resplandor_arcoiris <
     float min = 0.0;
     float max = 1.5;
     float step = 0.1;
-> = 0.85;
+uniform float beat_offset <
+    string name = "Calibración de Fase (Desfase)";
+    string widget_type = "slider";
+    float min = -100.0;
+    float max = 100.0;
+    float step = 0.01;
+> = 0.0;
 
 float hash2(float2 p)
 {
@@ -52,8 +66,10 @@ float4 mainImage(VertData v_in) : TARGET
 {
     float2 uv = v_in.uv;
 
-    // 1. Terremoto caótico ultra rápido
-    float time_step = floor(elapsed_time * velocidad_locura * 2.5);
+    // 1. Terremoto caótico sincronizado al tempo en fase
+    float bps = (bpm / 60.0) * velocidad_locura;
+    float synced_time = elapsed_time + beat_offset;
+    float time_step = floor(synced_time * bps * 2.0);
     float2 shake = float2(
         hash2(float2(time_step, 1.0)) - 0.5,
         hash2(float2(time_step, 2.0)) - 0.5
@@ -74,8 +90,8 @@ float4 mainImage(VertData v_in) : TARGET
     }
     float4 base_col = accum / float(SAMPLES);
 
-    // 3. Destello estroboscópico de colores espectrales ultra rápidos
-    float cycle = frac(elapsed_time * velocidad_locura);
+    // 3. Destello estroboscópico de colores espectrales al ritmo musical en fase
+    float cycle = frac(synced_time * bps);
     float3 hyper_color = spectral_rainbow(cycle + length(dir) * 2.0);
 
     // 4. Modo Deep-fried / sobreexposición de bajo y saturación

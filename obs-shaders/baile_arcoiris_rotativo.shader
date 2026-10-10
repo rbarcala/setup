@@ -1,10 +1,18 @@
+uniform float bpm <
+    string name = "Ritmo (BPM)";
+    string widget_type = "slider";
+    float min = 40.0;
+    float max = 240.0;
+    float step = 1.0;
+> = 128.0;
+
 uniform float velocidad_arcoiris <
-    string name = "Velocidad de Giro / Ciclo";
+    string name = "Multiplicador de Velocidad";
     string widget_type = "slider";
     float min = 0.1;
-    float max = 10.0;
+    float max = 5.0;
     float step = 0.1;
-> = 2.5;
+> = 1.0;
 
 uniform int modo_onda <
     string name = "Modo de Arcoiris (0: Espiral / Giro, 1: Radial Centro, 2: Diagonal Barrido)";
@@ -44,7 +52,13 @@ uniform int modo_mezcla <
     int min = 0;
     int max = 2;
     int step = 1;
-> = 1;
+uniform float beat_offset <
+    string name = "Calibración de Fase (Desfase)";
+    string widget_type = "slider";
+    float min = -100.0;
+    float max = 100.0;
+    float step = 0.01;
+> = 0.0;
 
 // Función de conversión HUE a RGB continua y vibrante
 float3 hue_to_rgb(float hue)
@@ -75,17 +89,19 @@ float4 mainImage(VertData v_in) : TARGET
     float angle = atan2(p.y, p.x); // -PI a PI
     float dist = length(p);
 
+    float synced_time = elapsed_time + beat_offset;
+    float speed_factor = (bpm / 60.0) * velocidad_arcoiris * 0.5;
     float hue_val = 0.0;
 
     if (modo_onda == 0) {
         // Espiral giratoria psicodélica: ángulo + distancia + tiempo
-        hue_val = (angle / 6.2831853) + (dist * frecuencia_espiral * 0.2) + (elapsed_time * velocidad_arcoiris * 0.2);
+        hue_val = (angle / 6.2831853) + (dist * frecuencia_espiral * 0.2) + (synced_time * speed_factor);
     } else if (modo_onda == 1) {
         // Ondas concéntricas que se expanden desde el centro
-        hue_val = (dist * frecuencia_espiral) - (elapsed_time * velocidad_arcoiris * 0.5);
+        hue_val = (dist * frecuencia_espiral) - (synced_time * speed_factor * 2.0);
     } else {
         // Barrido diagonal continuo
-        hue_val = (uv.x + uv.y * 0.7) * (frecuencia_espiral * 0.3) + (elapsed_time * velocidad_arcoiris * 0.25);
+        hue_val = (uv.x + uv.y * 0.7) * (frecuencia_espiral * 0.3) + (synced_time * speed_factor);
     }
 
     float3 rainbow = hue_to_rgb(hue_val);
