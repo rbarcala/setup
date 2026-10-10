@@ -30,21 +30,52 @@ uniform float dither_strength <
     float step = 0.02;
 > = 0.3;
 
-// Matriz de dithering Bayer 4x4
+// Matriz de dithering Bayer 4x4 evaluada sin array inicializador C
 float bayer4x4(float2 pos)
 {
     int x = int(fmod(pos.x, 4.0));
     int y = int(fmod(pos.y, 4.0));
-    int index = x + y * 4;
+    
+    float val = 0.0;
+    if (y == 0) {
+        if (x == 0) val = 0.0;
+        else if (x == 1) val = 8.0;
+        else if (x == 2) val = 2.0;
+        else val = 10.0;
+    } else if (y == 1) {
+        if (x == 0) val = 12.0;
+        else if (x == 1) val = 4.0;
+        else if (x == 2) val = 14.0;
+        else val = 6.0;
+    } else if (y == 2) {
+        if (x == 0) val = 3.0;
+        else if (x == 1) val = 11.0;
+        else if (x == 2) val = 1.0;
+        else val = 9.0;
+    } else {
+        if (x == 0) val = 15.0;
+        else if (x == 1) val = 7.0;
+        else if (x == 2) val = 13.0;
+        else val = 5.0;
+    }
 
-    float bayer[16] = {
-        0.0 / 16.0,  8.0 / 16.0,  2.0 / 16.0, 10.0 / 16.0,
-       12.0 / 16.0,  4.0 / 16.0, 14.0 / 16.0,  6.0 / 16.0,
-        3.0 / 16.0, 11.0 / 16.0,  1.0 / 16.0,  9.0 / 16.0,
-       15.0 / 16.0,  7.0 / 16.0, 13.0 / 16.0,  5.0 / 16.0
-    };
+    return (val / 16.0) - 0.5;
+}
 
-    return bayer[index] - 0.5;
+float3 get_gb_color(int idx)
+{
+    if (idx == 0) return float3(0.06, 0.22, 0.06);
+    if (idx == 1) return float3(0.19, 0.38, 0.19);
+    if (idx == 2) return float3(0.53, 0.75, 0.44);
+    return float3(0.61, 0.73, 0.06);
+}
+
+float3 get_cga_color(int idx)
+{
+    if (idx == 0) return float3(0.0, 0.0, 0.0);
+    if (idx == 1) return float3(0.0, 0.85, 0.85);
+    if (idx == 2) return float3(0.85, 0.0, 0.85);
+    return float3(1.0, 1.0, 1.0);
 }
 
 float4 mainImage(VertData v_in) : TARGET
@@ -62,27 +93,15 @@ float4 mainImage(VertData v_in) : TARGET
 
     if (modo_color == 1) {
         // Paleta Clásica Game Boy (4 tonos verdes)
-        float3 gb_colors[4] = {
-            float3(0.06, 0.22, 0.06), // Más oscuro
-            float3(0.19, 0.38, 0.19),
-            float3(0.53, 0.75, 0.44),
-            float3(0.61, 0.73, 0.06)  // Más brillante
-        };
         float val = clamp(luma + dither, 0.0, 0.999) * 4.0;
         int idx = clamp(int(floor(val)), 0, 3);
-        col.rgb = gb_colors[idx];
+        col.rgb = get_gb_color(idx);
     }
     else if (modo_color == 2) {
         // Paleta Retro CGA (Negro, Cian, Magenta, Blanco)
-        float3 cga_colors[4] = {
-            float3(0.0, 0.0, 0.0),
-            float3(0.0, 0.85, 0.85),
-            float3(0.85, 0.0, 0.85),
-            float3(1.0, 1.0, 1.0)
-        };
         float val = clamp(luma + dither, 0.0, 0.999) * 4.0;
         int idx = clamp(int(floor(val)), 0, 3);
-        col.rgb = cga_colors[idx];
+        col.rgb = get_cga_color(idx);
     }
     else if (modo_color == 3) {
         // Monocromático 1-bit / escala de grises reducida
@@ -98,4 +117,3 @@ float4 mainImage(VertData v_in) : TARGET
 
     return col;
 }
-

@@ -35,13 +35,21 @@ float hash1(float n)
     return frac(sin(n) * 43758.5453123);
 }
 
+float3 get_strobe_color(int idx)
+{
+    if (idx == 0) return float3(1.0, 0.05, 0.6); // Magenta neón
+    if (idx == 1) return float3(0.0, 0.9, 1.0);  // Cian
+    if (idx == 2) return float3(1.0, 0.85, 0.0); // Amarillo eléctrico
+    if (idx == 3) return float3(0.5, 0.0, 1.0);  // Violeta
+    return float3(0.05, 1.0, 0.4);               // Verde flúor
+}
+
 float4 mainImage(VertData v_in) : TARGET
 {
     float2 uv = v_in.uv;
 
     // Ritmo de cambio de foco de luz
     float step_time = floor(elapsed_time * velocidad_estroboscopica);
-    float rand_hue = hash1(step_time);
 
     // Movimiento rápido de cámara / temblor de beat
     float shake_x = (hash1(step_time * 1.3) - 0.5) * desface_rgb * 0.5;
@@ -59,16 +67,9 @@ float4 mainImage(VertData v_in) : TARGET
     float luma = dot(col, float3(0.299, 0.587, 0.114));
     col = lerp(float3(luma, luma, luma), col, saturacion_neon);
 
-    // Color estroboscópico de fiesta (Cian, Magenta, Amarillo, Azul eléctrico, Verde lima)
-    float3 strobe_colors[5] = {
-        float3(1.0, 0.05, 0.6),  // Magenta neón
-        float3(0.0, 0.9, 1.0),   // Cian
-        float3(1.0, 0.85, 0.0),  // Amarillo eléctrico
-        float3(0.5, 0.0, 1.0),   // Violeta
-        float3(0.05, 1.0, 0.4)   // Verde flúor
-    };
+    // Color estroboscópico de fiesta
     int col_idx = int(fmod(step_time, 5.0));
-    float3 active_strobe = strobe_colors[col_idx];
+    float3 active_strobe = get_strobe_color(col_idx);
 
     // Ráfaga estroboscópica con caída
     float strobe_cycle = frac(elapsed_time * velocidad_estroboscopica);
@@ -79,4 +80,3 @@ float4 mainImage(VertData v_in) : TARGET
 
     return float4(clamp(final_rgb, 0.0, 1.0), a);
 }
-

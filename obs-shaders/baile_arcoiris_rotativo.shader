@@ -56,15 +56,20 @@ float3 hue_to_rgb(float hue)
     return clamp(float3(r, g, b), 0.0, 1.0);
 }
 
+float overlay_channel(float base, float blend)
+{
+    return (base < 0.5) ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend));
+}
+
 float4 mainImage(VertData v_in) : TARGET
 {
     float2 uv = v_in.uv;
     float4 base_col = image.Sample(textureSampler, uv);
     if (base_col.a <= 0.001) return base_col;
 
-    // Coordenadas relativas al centro (-1 a 1) compensadas por relación de aspecto
+    // Coordenadas relativas al centro compensadas por relación de aspecto
     float aspect = uv_size.x / uv_size.y;
-    float2 p = (uv - 0.5);
+    float2 p = uv - 0.5;
     p.x *= aspect;
 
     float angle = atan2(p.y, p.x); // -PI a PI
@@ -94,13 +99,12 @@ float4 mainImage(VertData v_in) : TARGET
         // Multiplicación directa (tinte puro)
         final_rgb = lerp(base_col.rgb, base_col.rgb * desat_rainbow * 1.5, intensidad_arcoiris);
     } else if (modo_mezcla == 1) {
-        // Overlay / Luz vívida preservando los detalles y brillo
-        float3 overlay_res;
-        for (int i = 0; i < 3; i++) {
-            float base = base_col[i];
-            float blend = desat_rainbow[i];
-            overlay_res[i] = (base < 0.5) ? (2.0 * base * blend) : (1.0 - 2.0 * (1.0 - base) * (1.0 - blend));
-        }
+        // Overlay canal por canal sin indexación de arrays
+        float3 overlay_res = float3(
+            overlay_channel(base_col.r, desat_rainbow.r),
+            overlay_channel(base_col.g, desat_rainbow.g),
+            overlay_channel(base_col.b, desat_rainbow.b)
+        );
         final_rgb = lerp(base_col.rgb, overlay_res, intensidad_arcoiris);
     } else {
         // Aditivo / Pantalla
@@ -110,4 +114,3 @@ float4 mainImage(VertData v_in) : TARGET
 
     return float4(clamp(final_rgb, 0.0, 1.0), base_col.a);
 }
-

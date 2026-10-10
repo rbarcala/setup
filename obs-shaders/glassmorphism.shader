@@ -37,30 +37,35 @@ float4 mainImage(VertData v_in) : TARGET
     float2 uv = v_in.uv;
     float2 texel = 1.0 / uv_size;
 
-    // Muestreo en caja radial de 16 muestras para efecto frosted glass suave
     float4 accum = float4(0.0, 0.0, 0.0, 0.0);
-    float total_weight = 0.0;
-
-    // Dispersión con jitter sutil si hay ruido de escarcha
     float frost = (rand(uv * 500.0) - 0.5) * ruido_escarcha * desenfoque_radio;
+    float r = (desenfoque_radio + frost) * texel.y;
 
-    float r = desenfoque_radio + frost;
+    // Muestreo circular en 2 anillos (16 muestras) sin arrays estilo C
+    accum += image.Sample(textureSampler, uv);
+    
+    // Anillo exterior (8 direcciones)
+    accum += image.Sample(textureSampler, uv + float2( 1.0,  0.0) * r);
+    accum += image.Sample(textureSampler, uv + float2(-1.0,  0.0) * r);
+    accum += image.Sample(textureSampler, uv + float2( 0.0,  1.0) * r);
+    accum += image.Sample(textureSampler, uv + float2( 0.0, -1.0) * r);
+    accum += image.Sample(textureSampler, uv + float2( 0.7,  0.7) * r);
+    accum += image.Sample(textureSampler, uv + float2(-0.7,  0.7) * r);
+    accum += image.Sample(textureSampler, uv + float2( 0.7, -0.7) * r);
+    accum += image.Sample(textureSampler, uv + float2(-0.7, -0.7) * r);
 
-    float2 offsets[16] = {
-        float2(-1.0, -1.0), float2( 0.0, -1.0), float2( 1.0, -1.0), float2( 2.0, -1.0),
-        float2(-1.0,  0.0), float2( 0.0,  0.0), float2( 1.0,  0.0), float2(-2.0,  0.0),
-        float2(-1.0,  1.0), float2( 0.0,  1.0), float2( 1.0,  1.0), float2( 0.0,  2.0),
-        float2(-1.5, -0.5), float2( 1.5, -0.5), float2(-0.5,  1.5), float2( 0.5, -1.5)
-    };
+    // Anillo medio (8 direcciones a media distancia)
+    float r_half = r * 0.5;
+    accum += image.Sample(textureSampler, uv + float2( 0.92,  0.38) * r_half);
+    accum += image.Sample(textureSampler, uv + float2(-0.92,  0.38) * r_half);
+    accum += image.Sample(textureSampler, uv + float2( 0.38,  0.92) * r_half);
+    accum += image.Sample(textureSampler, uv + float2(-0.38, -0.92) * r_half);
+    accum += image.Sample(textureSampler, uv + float2(-0.38,  0.92) * r_half);
+    accum += image.Sample(textureSampler, uv + float2( 0.38, -0.92) * r_half);
+    accum += image.Sample(textureSampler, uv + float2( 0.92, -0.38) * r_half);
+    accum += image.Sample(textureSampler, uv + float2(-0.92, -0.38) * r_half);
 
-    for (int i = 0; i < 16; i++) {
-        float2 sample_uv = uv + offsets[i] * r * texel;
-        float4 s = image.Sample(textureSampler, sample_uv);
-        accum += s;
-        total_weight += 1.0;
-    }
-
-    float4 blurred = accum / total_weight;
+    float4 blurred = accum / 17.0;
 
     // Gradiente diagonal característico de glassmorphism (luz en esquina superior izquierda)
     float grad = (1.0 - uv.y * 0.7 + (1.0 - uv.x) * 0.3) * brillo_especular;
@@ -71,4 +76,3 @@ float4 mainImage(VertData v_in) : TARGET
 
     return float4(frosted_rgb, blurred.a);
 }
-
