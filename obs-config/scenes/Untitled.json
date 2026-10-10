@@ -71,7 +71,7 @@
             "versioned_id": "pipewire-screen-capture-source",
             "settings": {
                 "ShowCursor": false,
-                "RestoreToken": "1b75f5c7-e4e1-4dfa-b5f2-168b9473956f"
+                "RestoreToken": "3c70fdcc-dcce-4f31-ac79-9156ae0ae5c4"
             },
             "mixers": 0,
             "sync": 0,
@@ -3021,7 +3021,39 @@
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
             "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e",
-            "private_settings": {}
+            "private_settings": {},
+            "filters": [
+                {
+                    "prev_ver": 537001984,
+                    "name": "User-defined shader",
+                    "uuid": "34323228-12ae-4be8-9b23-86766c16efbd",
+                    "id": "shader_filter",
+                    "versioned_id": "shader_filter",
+                    "settings": {
+                        "from_file": true,
+                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/baile_1_beat_pump.shader",
+                        "override_entire_effect": false,
+                        "beat_offset": 0.15949999999999998,
+                        "bpm": 128.0
+                    },
+                    "mixers": 0,
+                    "sync": 0,
+                    "flags": 0,
+                    "volume": 1.0,
+                    "balance": 0.5,
+                    "enabled": true,
+                    "muted": false,
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "hotkeys": {},
+                    "deinterlace_mode": 0,
+                    "deinterlace_field_order": 0,
+                    "monitoring_type": 0,
+                    "private_settings": {}
+                }
+            ]
         },
         {
             "prev_ver": 537001984,
@@ -8815,7 +8847,39 @@
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
             "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e",
-            "private_settings": {}
+            "private_settings": {},
+            "filters": [
+                {
+                    "prev_ver": 537001984,
+                    "name": "User-defined shader",
+                    "uuid": "46a4933a-2a65-4c4d-b0e7-fd89cb0666db",
+                    "id": "shader_filter",
+                    "versioned_id": "shader_filter",
+                    "settings": {
+                        "from_file": true,
+                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/baile_4_hardcore_bass.shader",
+                        "override_entire_effect": false,
+                        "beat_offset": 0.21025000000000205,
+                        "bpm": 128.0
+                    },
+                    "mixers": 0,
+                    "sync": 0,
+                    "flags": 0,
+                    "volume": 1.0,
+                    "balance": 0.5,
+                    "enabled": true,
+                    "muted": false,
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "hotkeys": {},
+                    "deinterlace_mode": 0,
+                    "deinterlace_field_order": 0,
+                    "monitoring_type": 0,
+                    "private_settings": {}
+                }
+            ]
         }
     ],
     "groups": [
@@ -9146,8 +9210,8 @@
             "settings": {
                 "id_counter": 0,
                 "custom_size": true,
-                "cx": 1445,
-                "cy": 699,
+                "cx": 1920,
+                "cy": 1080,
                 "items": [
                     {
                         "name": "DURMIENDOZZZ.gif",
@@ -11898,8 +11962,8 @@
             "name": "Fuego"
         }
     ],
-    "current_scene": "CLASE",
-    "current_program_scene": "CLASE",
+    "current_scene": "Baile tuneado",
+    "current_program_scene": "Baile tuneado",
     "canvases": [],
     "current_transition": "Fade",
     "transition_duration": 50,
@@ -11930,7 +11994,7 @@
     "saved_projectors": [],
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -16,
+    "scaling_level": -9,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "virtual-camera": {
