@@ -34,7 +34,7 @@ Una vez que el script anterior generó tu `obs-assets.zip`, ejecutá `./upload_r
 7. **MEGA (megasync)**: Repositorio e integración oficial de MEGA con extensión para Nautilus.
 8. **Visual Studio Code**: Repositorio oficial de Microsoft APT con clave GPG dedicada.
 9. **Clipboard Indicator**: Extensión de GNOME Shell con hotkey `Super+V` asignada al portapapeles (reemplazando el atajo por defecto del sistema).
-10. **YoutubeController viewer**: Instalación de dependencias de sistema y ejecución de `make install`, limpiando el repositorio descargado tras finalizar.
+10. **YoutubeController viewer**: Instalación de dependencias de sistema y ejecución de `make install` en `~/.local/share/youtube-stream-controller`. Incluye sincronización continua de BPM y fase rítmica con Spotify y OBS Studio (`make test` y `make setup-obs`).
 11. **Slack**: Instalación vía snap.
 12. **Fuentes**: 
     - **Microsoft Core Fonts**: Instalación del paquete `ttf-mscorefonts-installer` aceptando el EULA automáticamente, para proveer **Impact**, Arial, Times New Roman, etc.
