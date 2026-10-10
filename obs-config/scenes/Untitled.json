@@ -12,7 +12,7 @@
         "mixers": 255,
         "sync": 0,
         "flags": 0,
-        "volume": 1.0,
+        "volume": 0.99000000953674316,
         "balance": 0.5,
         "enabled": true,
         "muted": false,
@@ -71,7 +71,7 @@
             "versioned_id": "pipewire-screen-capture-source",
             "settings": {
                 "ShowCursor": false,
-                "RestoreToken": "e61f82f8-198a-4cef-8659-9e53be46b7c8"
+                "RestoreToken": "1b75f5c7-e4e1-4dfa-b5f2-168b9473956f"
             },
             "mixers": 0,
             "sync": 0,
@@ -85,44 +85,6 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "hotkeys": {},
-            "deinterlace_mode": 0,
-            "deinterlace_field_order": 0,
-            "monitoring_type": 0,
-            "private_settings": {}
-        },
-        {
-            "prev_ver": 537001984,
-            "name": "Overlay Stream Hub",
-            "uuid": "932db7d2-260b-49e3-9c39-148d09b2f2cd",
-            "id": "browser_source",
-            "versioned_id": "browser_source",
-            "settings": {
-                "url": "http://localhost:8000/overlay.html",
-                "width": 1920,
-                "height": 1080,
-                "shutdown": true,
-                "restart_when_active": true,
-                "css": "body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }",
-                "reroute_audio": false
-            },
-            "mixers": 0,
-            "sync": 0,
-            "flags": 0,
-            "volume": 1.0,
-            "balance": 0.5,
-            "enabled": true,
-            "muted": false,
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "hotkeys": {
-                "libobs.mute": [],
-                "libobs.unmute": [],
-                "libobs.push-to-mute": [],
-                "libobs.push-to-talk": [],
-                "ObsBrowser.Refresh": []
-            },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
@@ -1958,8 +1920,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "unload": true,
-                "file": "/home/rbarcala/.local/share/obs-assets/Screamer/FREDDY.png"
+                "file": "/home/rbarcala/.local/share/obs-assets/Screamer/FREDDY.png",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -1985,8 +1947,8 @@
             "id": "image_source",
             "versioned_id": "image_source",
             "settings": {
-                "unload": true,
-                "file": "/home/rbarcala/.local/share/obs-assets/Screamer/CAUGHT.png"
+                "file": "/home/rbarcala/.local/share/obs-assets/Screamer/CAUGHT.png",
+                "unload": true
             },
             "mixers": 0,
             "sync": 0,
@@ -2117,6 +2079,79 @@
                 "is_local_file": true,
                 "local_file": "/home/rbarcala/.local/share/obs-assets/Audios/OHMYGOD.html",
                 "shutdown": false,
+                "restart_when_active": true
+            },
+            "mixers": 255,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {
+                "libobs.mute": [],
+                "libobs.unmute": [],
+                "libobs.push-to-mute": [],
+                "libobs.push-to-talk": [],
+                "ObsBrowser.Refresh": []
+            },
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
+        },
+        {
+            "prev_ver": 537001984,
+            "name": "Overlay Stream Hub",
+            "uuid": "932db7d2-260b-49e3-9c39-148d09b2f2cd",
+            "id": "browser_source",
+            "versioned_id": "browser_source",
+            "settings": {
+                "url": "http://localhost:8000/overlay.html",
+                "width": 1920,
+                "height": 1080,
+                "shutdown": true,
+                "restart_when_active": true,
+                "css": "body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }",
+                "reroute_audio": false
+            },
+            "mixers": 0,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {
+                "libobs.mute": [],
+                "libobs.unmute": [],
+                "libobs.push-to-mute": [],
+                "libobs.push-to-talk": [],
+                "ObsBrowser.Refresh": []
+            },
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
+        },
+        {
+            "prev_ver": 537001984,
+            "name": "CHICKEN",
+            "uuid": "560a9cbf-b052-4033-8d2f-9d189083d8a2",
+            "id": "browser_source",
+            "versioned_id": "browser_source",
+            "settings": {
+                "is_local_file": true,
+                "local_file": "/home/rbarcala/.local/share/obs-assets/Audios/CHICKEN.html",
+                "shutdown": true,
                 "restart_when_active": true
             },
             "mixers": 255,
@@ -2995,7 +3030,7 @@
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 4,
+                "id_counter": 5,
                 "custom_size": false,
                 "items": [
                     {
@@ -7989,7 +8024,7 @@
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "custom_size": false,
                 "items": [
                     {
@@ -8215,7 +8250,7 @@
                     {
                         "name": "BRUH",
                         "source_uuid": "a0345de0-10eb-45db-91a0-a164f19b078d",
-                        "visible": true,
+                        "visible": false,
                         "locked": false,
                         "rot": 0.0,
                         "scale_ref": {
@@ -8325,7 +8360,7 @@
                     {
                         "name": "OHMYGOD",
                         "source_uuid": "b5dd15e1-3909-417b-997b-ddbeb892500e",
-                        "visible": true,
+                        "visible": false,
                         "locked": false,
                         "rot": 0.0,
                         "scale_ref": {
@@ -8341,6 +8376,61 @@
                         "crop_right": 0,
                         "crop_bottom": 0,
                         "id": 10,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 300
+                        },
+                        "hide_transition": {
+                            "duration": 300
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "CHICKEN",
+                        "source_uuid": "560a9cbf-b052-4033-8d2f-9d189083d8a2",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 11,
                         "group_item_backup": true,
                         "pos": {
                             "x": 0.0,
@@ -8616,8 +8706,8 @@
                         "from_file": true,
                         "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/bola_de_disco.shader",
                         "override_entire_effect": false,
-                        "speed": 0.5,
-                        "scale": 100.0
+                        "speed": 1.0,
+                        "scale": 33.057899999999997
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -11496,7 +11586,7 @@
                     {
                         "name": "BRUH",
                         "source_uuid": "a0345de0-10eb-45db-91a0-a164f19b078d",
-                        "visible": true,
+                        "visible": false,
                         "locked": false,
                         "rot": 0.0,
                         "scale_ref": {
@@ -11606,7 +11696,7 @@
                     {
                         "name": "OHMYGOD",
                         "source_uuid": "b5dd15e1-3909-417b-997b-ddbeb892500e",
-                        "visible": true,
+                        "visible": false,
                         "locked": false,
                         "rot": 0.0,
                         "scale_ref": {
@@ -11622,6 +11712,61 @@
                         "crop_right": 0,
                         "crop_bottom": 0,
                         "id": 10,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 300
+                        },
+                        "hide_transition": {
+                            "duration": 300
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "CHICKEN",
+                        "source_uuid": "560a9cbf-b052-4033-8d2f-9d189083d8a2",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 11,
                         "group_item_backup": false,
                         "pos": {
                             "x": 0.0,
@@ -11677,7 +11822,9 @@
                 "libobs.show_scene_item.9": [],
                 "libobs.hide_scene_item.9": [],
                 "libobs.show_scene_item.10": [],
-                "libobs.hide_scene_item.10": []
+                "libobs.hide_scene_item.10": [],
+                "libobs.show_scene_item.11": [],
+                "libobs.hide_scene_item.11": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
@@ -11751,8 +11898,8 @@
             "name": "Fuego"
         }
     ],
-    "current_scene": "SCREAMER",
-    "current_program_scene": "SCREAMER",
+    "current_scene": "CLASE",
+    "current_program_scene": "CLASE",
     "canvases": [],
     "current_transition": "Fade",
     "transition_duration": 50,
