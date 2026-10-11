@@ -25,11 +25,17 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
    
    > ⚠️ **Solución de Lag en NVIDIA (XWayland):** El analizador oficial de OBS advierte que ejecutar OBS bajo la capa de compatibilidad XWayland en tarjetas NVIDIA produce un desajuste severo en la entrega de fotogramas (frame pacing) y bloquea la captura por PipeWire. El script aplica la solución forzando la plataforma Wayland. Si luego de la instalación la interfaz se ve rota o los paneles quedan flotando, simplemente cerrá OBS por completo (`killall -9 obs`), volvelo a abrir y andá al menú superior: **Docks > Reset UI** (Restablecer interfaz). Para verificar el rendimiento, andá a **View > Stats** y asegurate de que el *Average time to render frame* ronde entre 1.5ms - 3ms.
 
-### 🛠️ Script Auxiliar: `save_obs_to_repo.sh`
-Se incluye el script `save_obs_to_repo.sh` para facilitar las actualizaciones. Si modificás tus escenas en OBS o agregás imágenes/videos nuevos a la carpeta de recursos del sistema (`~/.local/share/obs-assets`), simplemente ejecutá `./save_obs_to_repo.sh` y el script copiará automáticamente la última versión de tus JSON y generará el `.zip` listo para subir a GitHub Releases.
+### 🛠️ Comandos Makefile (Sincronización y Testing de OBS)
+El repositorio cuenta con un `Makefile` para facilitar la gestión, testeo y transferencia rápida de escenas y shaders:
 
-### 🚀 Script Auxiliar: `upload_release.sh`
-Una vez que el script anterior generó tu `obs-assets.zip`, ejecutá `./upload_release.sh`. Este script utiliza la herramienta oficial de GitHub (`gh`) para subir automáticamente el archivo pesado de 300MB a las Releases de tu repositorio sin que tengas que usar el navegador web.
+- `make sync`: Sincroniza tanto escenas como shaders a OBS Studio.
+- `make sync-shaders`: Transfiere rápidamente los shaders (`obs-shaders/`) a `~/.config/obs-studio/plugins/obs-shaderfilter/data/examples/` para probarlos en vivo.
+- `make sync-scenes`: Sincroniza las escenas del repo a OBS Studio, descargando los recursos (`obs-assets.zip`) únicamente si no se habían descargado antes o si la versión remota en GitHub Releases es distinta a la instalada.
+- `make test-shaders`: Ejecuta una comprobación de integridad sintáctica y validación de variables en todos los shaders del repo.
+- `make save-obs`: Respalda tus escenas locales de OBS y genera el `.zip` de assets listo para subir.
+- `make upload-release`: Sube automáticamente `obs-assets.zip` a GitHub Releases mediante `gh`.
+- `make status`: Muestra la cantidad de shaders, escenas y assets instalados versus el repositorio.
+
 6. **Grub Customizer**: Repositorio PPA oficial (`ppa:danielrichter2007/grub-customizer`).
 7. **MEGA (megasync)**: Repositorio e integración oficial de MEGA con extensión para Nautilus.
 8. **Visual Studio Code**: Repositorio oficial de Microsoft APT con clave GPG dedicada.
@@ -51,8 +57,8 @@ El script es seguro de ejecutar múltiples veces. Cada sección verifica si la a
 ```bash
 git clone https://github.com/rbarcala/setup.git
 cd setup
-chmod +x setup.sh
-./setup.sh
+make setup       # O bien ./setup.sh para instalación completa
+make sync        # Para sincronizar shaders y escenas en cualquier momento
 ```
 
 > **Nota:** No ejecutar con `sudo`. El script pide permisos de superusuario cuando los necesita.

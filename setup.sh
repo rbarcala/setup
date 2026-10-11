@@ -212,46 +212,15 @@ fi
 # Copiar shaders personalizados si existen en el repositorio
 if [ -d "$SCRIPT_DIR/obs-shaders" ]; then
     log_info "Copiando shaders personalizados a OBS..."
-    mkdir -p "$OBS_PLUGIN_DIR/data/examples"
-    cp "$SCRIPT_DIR/obs-shaders/"*.shader "$OBS_PLUGIN_DIR/data/examples/" 2>/dev/null || true
+    "$SCRIPT_DIR/scripts/sync_shaders.sh" || true
     log_success "Shaders personalizados instalados."
 fi
 
-# Instalar configuraciones y escenas de OBS guardadas en el repo
+# Instalar configuraciones y escenas de OBS guardadas en el repo (solo si faltan o cambiaron)
 if [ -d "$SCRIPT_DIR/obs-config" ]; then
-    log_info "Instalando configuraciones, escenas y recursos (assets) de OBS..."
-    
-    ASSETS_DEST="$HOME/.local/share/obs-assets"
-    mkdir -p "$ASSETS_DEST"
-    
-    log_info "Descargando recursos multimedia (Assets) desde GitHub Releases..."
-    ASSETS_URL="https://github.com/rbarcala/setup/releases/latest/download/obs-assets.zip"
-    rm -f /tmp/obs-assets.zip
-    wget -q --show-progress -O /tmp/obs-assets.zip "$ASSETS_URL" || true
-    
-    if [ -f "/tmp/obs-assets.zip" ] && file "/tmp/obs-assets.zip" | grep -qi "zip archive"; then
-        unzip -o -q /tmp/obs-assets.zip -d /tmp/obs_unzip_temp
-        cp -r /tmp/obs_unzip_temp/assets/* "$ASSETS_DEST/" 2>/dev/null || true
-        rm -rf /tmp/obs-assets.zip /tmp/obs_unzip_temp
-        log_success "Assets descargados e instalados."
-    else
-        log_warn "obs-assets.zip no disponible en Releases aún."
-        rm -f /tmp/obs-assets.zip
-    fi
-
-    mkdir -p "$HOME/.config/obs-studio/basic/scenes"
-    if [ -d "$SCRIPT_DIR/obs-config/scenes" ]; then
-        for scene_file in "$SCRIPT_DIR/obs-config/scenes/"*.json; do
-            if [ -f "$scene_file" ]; then
-                filename=$(basename "$scene_file")
-                DEST_SCENE="$HOME/.config/obs-studio/basic/scenes/$filename"
-                cp "$scene_file" "$DEST_SCENE"
-                sed -i "s|/home/[^/]*/MEGA/DOCS/OBS|$ASSETS_DEST|g" "$DEST_SCENE"
-                sed -i "s|/home/[^/]*/\.config|$HOME/.config|g" "$DEST_SCENE"
-            fi
-        done
-        log_success "Escenas de OBS y rutas instaladas."
-    fi
+    log_info "Sincronizando configuraciones, escenas y recursos (assets) de OBS..."
+    "$SCRIPT_DIR/scripts/sync_scenes.sh" || true
+    log_success "Escenas de OBS y recursos sincronizados."
 fi
 
 # ------------------------------------------------------------------------------
