@@ -1,26 +1,26 @@
 uniform float offset_x <
-    string name = "Desplazamiento X (píxeles)";
+    string name = "Distancia Horizontal de la Sombra (px)";
     string widget_type = "slider";
-    float min = -50.0;
-    float max = 50.0;
+    float min = -40.0;
+    float max = 40.0;
     float step = 1.0;
 > = 12.0;
 
 uniform float offset_y <
-    string name = "Desplazamiento Y (píxeles)";
+    string name = "Distancia Vertical de la Sombra (px)";
     string widget_type = "slider";
-    float min = -50.0;
-    float max = 50.0;
+    float min = -40.0;
+    float max = 40.0;
     float step = 1.0;
 > = 14.0;
 
 uniform float radio_desenfoque <
-    string name = "Difuminado de la Sombra";
+    string name = "Suavizado / Difuminado de la Sombra (px)";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 30.0;
-    float step = 1.0;
-> = 12.0;
+    float max = 25.0;
+    float step = 0.5;
+> = 10.0;
 
 uniform float opacidad_sombra <
     string name = "Opacidad de la Sombra";
@@ -40,7 +40,6 @@ float4 mainImage(VertData v_in) : TARGET
     float2 uv = v_in.uv;
     float4 foreground = image.Sample(textureSampler, uv);
 
-    // Muestreo del alfa en la posición desplazada para calcular la sombra proyectada
     float2 shadow_center_uv = uv - float2(offset_x, offset_y) / uv_size;
 
     float shadow_alpha = 0.0;
@@ -48,7 +47,6 @@ float4 mainImage(VertData v_in) : TARGET
     if (radio_desenfoque <= 0.5) {
         shadow_alpha = image.Sample(textureSampler, shadow_center_uv).a;
     } else {
-        // Muestreo de 12 puntos en círculo para difusión suave de la sombra
         float rad = radio_desenfoque / uv_size.y;
         float total_samples = 12.0;
         float alpha_acc = 0.0;
@@ -63,7 +61,6 @@ float4 mainImage(VertData v_in) : TARGET
 
     shadow_alpha *= opacidad_sombra;
 
-    // Componer: la sombra aparece solo donde el foreground no es 100% opaco
     float3 shadow_color = color_sombra.rgb;
     float out_alpha = foreground.a + shadow_alpha * (1.0 - foreground.a);
     float3 out_rgb = foreground.rgb * foreground.a + shadow_color * (shadow_alpha * (1.0 - foreground.a));
@@ -74,4 +71,3 @@ float4 mainImage(VertData v_in) : TARGET
 
     return float4(out_rgb, clamp(out_alpha, 0.0, 1.0));
 }
-

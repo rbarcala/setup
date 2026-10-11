@@ -1,53 +1,53 @@
 uniform float radio_sup_izq <
-    string name = "Superior Izquierda";
+    string name = "Recorte Esquina Superior Izquierda (%)";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 50.0;
-    float step = 0.1;
+    float max = 15.0;
+    float step = 0.05;
 > = 0.0;
 
 uniform float radio_sup_der <
-    string name = "Superior Derecha";
+    string name = "Recorte Esquina Superior Derecha (%)";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 50.0;
-    float step = 0.1;
+    float max = 15.0;
+    float step = 0.05;
 > = 0.0;
 
 uniform float radio_inf_izq <
-    string name = "Inferior Izquierda";
+    string name = "Recorte Esquina Inferior Izquierda (%)";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 50.0;
-    float step = 0.1;
+    float max = 15.0;
+    float step = 0.05;
 > = 0.0;
 
 uniform float radio_inf_der <
-    string name = "Inferior Derecha";
+    string name = "Recorte Esquina Inferior Derecha (%)";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 50.0;
-    float step = 0.1;
+    float max = 15.0;
+    float step = 0.05;
 > = 0.0;
 
 uniform bool diagonal <
-    string name = "Corte Diagonal (marcado) / Redondo (desmarcado)";
+    string name = "Usar Corte en Bisel Diagonal (en vez de Curvo)";
 > = false;
 
 float4 mainImage(VertData v_in) : TARGET
 {
     float2 uv = v_in.uv;
     float2 px = uv * uv_size;
-    
+
     // Usamos la dimensión menor para que el % del radio sea proporcional y circular
     float min_dim = min(uv_size.x, uv_size.y);
     float r_tl = (radio_sup_izq * 0.01) * min_dim;
     float r_tr = (radio_sup_der * 0.01) * min_dim;
     float r_bl = (radio_inf_izq * 0.01) * min_dim;
     float r_br = (radio_inf_der * 0.01) * min_dim;
-    
+
     float alpha_mult = 1.0;
-    
+
     // Esquina Superior Izquierda
     if (px.x < r_tl && px.y < r_tl) {
         if (diagonal) {
@@ -57,7 +57,7 @@ float4 mainImage(VertData v_in) : TARGET
             alpha_mult = min(alpha_mult, clamp(r_tl - d + 0.5, 0.0, 1.0));
         }
     }
-    
+
     // Esquina Superior Derecha
     float dx_tr = uv_size.x - px.x;
     if (dx_tr < r_tr && px.y < r_tr) {
@@ -68,7 +68,7 @@ float4 mainImage(VertData v_in) : TARGET
             alpha_mult = min(alpha_mult, clamp(r_tr - d + 0.5, 0.0, 1.0));
         }
     }
-    
+
     // Esquina Inferior Izquierda
     float dy_bl = uv_size.y - px.y;
     if (px.x < r_bl && dy_bl < r_bl) {
@@ -79,7 +79,7 @@ float4 mainImage(VertData v_in) : TARGET
             alpha_mult = min(alpha_mult, clamp(r_bl - d + 0.5, 0.0, 1.0));
         }
     }
-    
+
     // Esquina Inferior Derecha
     float dx_br = uv_size.x - px.x;
     float dy_br = uv_size.y - px.y;
@@ -91,9 +91,9 @@ float4 mainImage(VertData v_in) : TARGET
             alpha_mult = min(alpha_mult, clamp(r_br - d + 0.5, 0.0, 1.0));
         }
     }
-    
+
     float4 col = image.Sample(textureSampler, uv);
-    col.a *= alpha_mult; // Recorte con borde suavizado
-    
+    col.a *= alpha_mult;
+
     return col;
 }

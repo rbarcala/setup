@@ -1,5 +1,5 @@
 uniform int modo_color <
-    string name = "Modo de Color (0: Normal, 1: Game Boy, 2: CGA Retro, 3: Monocromático)";
+    string name = "Paleta de Color (0: Normal, 1: Game Boy, 2: CGA Retro, 3: Blanco y Negro)";
     string widget_type = "slider";
     int min = 0;
     int max = 3;
@@ -7,35 +7,34 @@ uniform int modo_color <
 > = 0;
 
 uniform float pixel_size <
-    string name = "Tamaño de Píxel";
-    string widget_type = "slider";
-    float min = 1.0;
-    float max = 64.0;
-    float step = 1.0;
-> = 8.0;
-
-uniform float niveles_color <
-    string name = "Niveles de Color (Modo Normal)";
+    string name = "Tamaño de los Píxeles (1080p)";
     string widget_type = "slider";
     float min = 2.0;
     float max = 32.0;
     float step = 1.0;
 > = 6.0;
 
+uniform float niveles_color <
+    string name = "Cantidad de Tonos de Color";
+    string widget_type = "slider";
+    float min = 2.0;
+    float max = 16.0;
+    float step = 1.0;
+> = 6.0;
+
 uniform float dither_strength <
-    string name = "Intensidad de Dither (Bayer 4x4)";
+    string name = "Trama de Puntos Retro (Dithering)";
     string widget_type = "slider";
     float min = 0.0;
-    float max = 1.0;
+    float max = 0.8;
     float step = 0.02;
-> = 0.3;
+> = 0.25;
 
-// Matriz de dithering Bayer 4x4 evaluada sin array inicializador C
 float bayer4x4(float2 pos)
 {
     int x = int(fmod(pos.x, 4.0));
     int y = int(fmod(pos.y, 4.0));
-    
+
     float val = 0.0;
     if (y == 0) {
         if (x == 0) val = 0.0;
@@ -81,7 +80,6 @@ float3 get_cga_color(int idx)
 float4 mainImage(VertData v_in) : TARGET
 {
     float2 coord_px = v_in.uv * uv_size;
-    // Pixelación
     float2 block_coord = floor(coord_px / pixel_size) * pixel_size;
     float2 pixel_uv = (block_coord + 0.5 * pixel_size) / uv_size;
 
@@ -92,25 +90,18 @@ float4 mainImage(VertData v_in) : TARGET
     float luma = dot(col.rgb, float3(0.299, 0.587, 0.114));
 
     if (modo_color == 1) {
-        // Paleta Clásica Game Boy (4 tonos verdes)
         float val = clamp(luma + dither, 0.0, 0.999) * 4.0;
         int idx = clamp(int(floor(val)), 0, 3);
         col.rgb = get_gb_color(idx);
-    }
-    else if (modo_color == 2) {
-        // Paleta Retro CGA (Negro, Cian, Magenta, Blanco)
+    } else if (modo_color == 2) {
         float val = clamp(luma + dither, 0.0, 0.999) * 4.0;
         int idx = clamp(int(floor(val)), 0, 3);
         col.rgb = get_cga_color(idx);
-    }
-    else if (modo_color == 3) {
-        // Monocromático 1-bit / escala de grises reducida
+    } else if (modo_color == 3) {
         float val = clamp(luma + dither, 0.0, 1.0);
         float quantized = floor(val * niveles_color + 0.5) / niveles_color;
         col.rgb = float3(quantized, quantized, quantized);
-    }
-    else {
-        // Modo Normal con reducción de canales RGB y dither
+    } else {
         float3 dithered = col.rgb + dither;
         col.rgb = clamp(floor(dithered * (niveles_color - 1.0) + 0.5) / (niveles_color - 1.0), 0.0, 1.0);
     }
