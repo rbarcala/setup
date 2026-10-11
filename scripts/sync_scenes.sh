@@ -112,3 +112,4 @@ if [ -d "$SCRIPT_DIR/obs-config/scenes" ]; then
 fi
 
 echo "[✓] Proceso de sincronización de escenas y assets finalizado con éxito."
+

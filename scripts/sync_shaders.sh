@@ -30,3 +30,4 @@ for shader_file in "$SHADERS_SRC"/*.shader; do
 done
 
 echo "[OK] $COUNT shaders sincronizados con OBS Studio con éxito."
+

@@ -82,3 +82,4 @@ status:
 clean:
 	@rm -f /tmp/obs-assets-*.zip /tmp/obs-assets-unpack-*
 	@echo "✓ Archivos temporales eliminados."
+
