@@ -3069,7 +3069,7 @@
                         "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/baile_1_beat_pump.shader",
                         "override_entire_effect": false,
                         "bpm": 128.0,
-                        "beat_offset": 0.36525000000000007
+                        "beat_offset": 0.17925000000000002
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -3810,7 +3810,37 @@
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
             "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e",
-            "private_settings": {}
+            "private_settings": {},
+            "filters": [
+                {
+                    "prev_ver": 537001984,
+                    "name": "User-defined shader",
+                    "uuid": "13e1f79a-261f-4ee3-95f8-94507834ad62",
+                    "id": "shader_filter",
+                    "versioned_id": "shader_filter",
+                    "settings": {
+                        "from_file": true,
+                        "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/distorsion_calor.shader",
+                        "override_entire_effect": false
+                    },
+                    "mixers": 0,
+                    "sync": 0,
+                    "flags": 0,
+                    "volume": 1.0,
+                    "balance": 0.5,
+                    "enabled": true,
+                    "muted": false,
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "hotkeys": {},
+                    "deinterlace_mode": 0,
+                    "deinterlace_field_order": 0,
+                    "monitoring_type": 0,
+                    "private_settings": {}
+                }
+            ]
         },
         {
             "prev_ver": 537001984,
@@ -4128,11 +4158,11 @@
                         "group_item_backup": true,
                         "pos": {
                             "x": 0.0,
-                            "y": 294.47781372070312
+                            "y": 120.3092041015625
                         },
                         "pos_rel": {
                             "x": -1.7777777910232544,
-                            "y": -0.45467072725296021
+                            "y": -0.77720516920089722
                         },
                         "scale": {
                             "x": 0.99521994590759277,
@@ -4182,12 +4212,12 @@
                         "id": 7,
                         "group_item_backup": true,
                         "pos": {
-                            "x": 1442.0155029296875,
-                            "y": 182.44659423828125
+                            "x": 1442.014892578125,
+                            "y": 8.27783203125
                         },
                         "pos_rel": {
-                            "x": 0.89262127876281738,
-                            "y": -0.66213595867156982
+                            "x": 0.89262014627456665,
+                            "y": -0.98467069864273071
                         },
                         "scale": {
                             "x": 0.99046272039413452,
@@ -5142,12 +5172,12 @@
                         "id": 10,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 388.0,
-                            "y": 533.0
+                            "x": 589.0,
+                            "y": 0.0
                         },
                         "pos_rel": {
-                            "x": -1.059259295463562,
-                            "y": -0.012962937355041504
+                            "x": -0.68703705072402954,
+                            "y": -1.0
                         },
                         "scale": {
                             "x": 0.57151937484741211,
@@ -8681,7 +8711,7 @@
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 1,
+                "id_counter": 3,
                 "custom_size": false,
                 "items": [
                     {
@@ -8738,6 +8768,613 @@
                             "duration": 300
                         },
                         "private_settings": {}
+                    },
+                    {
+                        "name": "DISCOBALL.gif",
+                        "source_uuid": "0e2d5728-0743-43c4-a1dd-0a914f5d43d4",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 2,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 784.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -0.32592591643333435,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.3384029865264893,
+                            "y": 1.3400809764862061
+                        },
+                        "scale_rel": {
+                            "x": 1.3384029865264893,
+                            "y": 1.3400809764862061
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "DEMO.gif",
+                        "source_uuid": "f8279711-7961-4cdf-a3a9-084321f3f6c8",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 4,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1346.0,
+                            "y": 679.0
+                        },
+                        "pos_rel": {
+                            "x": 0.71481484174728394,
+                            "y": 0.25740742683410645
+                        },
+                        "scale": {
+                            "x": 1.3836734294891357,
+                            "y": 1.3834586143493652
+                        },
+                        "scale_rel": {
+                            "x": 1.3836734294891357,
+                            "y": 1.3834586143493652
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "GATOBAILE.gif",
+                        "source_uuid": "027afe92-0988-4344-812b-ee4b5fe66b62",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 6,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 578.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -0.70740741491317749,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.961904764175415,
+                            "y": 1.9625668525695801
+                        },
+                        "scale_rel": {
+                            "x": 1.961904764175415,
+                            "y": 1.9625669717788696
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "GMOD.gif",
+                        "source_uuid": "318f231a-d470-4bec-811e-50e7331f785e",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 7,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 0.0,
+                            "y": 18.0001220703125
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -0.96666646003723145
+                        },
+                        "scale": {
+                            "x": 0.79444444179534912,
+                            "y": 0.79555553197860718
+                        },
+                        "scale_rel": {
+                            "x": 0.79444444179534912,
+                            "y": 0.79555553197860718
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "KIRBY.gif",
+                        "source_uuid": "89f34ddc-8bb7-480d-b8eb-40853148c016",
+                        "visible": true,
+                        "locked": false,
+                        "rot": -18.495988845825195,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 8,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1707.672119140625,
+                            "y": 582.3121337890625
+                        },
+                        "pos_rel": {
+                            "x": 1.3845779895782471,
+                            "y": 0.078355789184570312
+                        },
+                        "scale": {
+                            "x": 1.4953271150588989,
+                            "y": 1.4921875
+                        },
+                        "scale_rel": {
+                            "x": 1.4953271150588989,
+                            "y": 1.4921875
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "PABLO.gif",
+                        "source_uuid": "aae2ed8e-3f59-401c-9595-f767514b1f10",
+                        "visible": false,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 9,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1376.0,
+                            "y": 152.000244140625
+                        },
+                        "pos_rel": {
+                            "x": 0.77037036418914795,
+                            "y": -0.71851807832717896
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "PERRO.gif",
+                        "source_uuid": "7b71c38c-af33-4b70-9cee-d2331b29e5a2",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 10,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 970.0,
+                            "y": 845.0
+                        },
+                        "pos_rel": {
+                            "x": 0.018518518656492233,
+                            "y": 0.56481480598449707
+                        },
+                        "scale": {
+                            "x": 1.6607142686843872,
+                            "y": 1.6607142686843872
+                        },
+                        "scale_rel": {
+                            "x": 1.6607142686843872,
+                            "y": 1.6607142686843872
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "PINGUINO.gif",
+                        "source_uuid": "e0b492ba-e006-40b8-9b3f-9c050e84088c",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 11,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1102.0,
+                            "y": 740.0
+                        },
+                        "pos_rel": {
+                            "x": 0.26296296715736389,
+                            "y": 0.37037038803100586
+                        },
+                        "scale": {
+                            "x": 0.77661794424057007,
+                            "y": 0.77682405710220337
+                        },
+                        "scale_rel": {
+                            "x": 0.77661794424057007,
+                            "y": 0.77682405710220337
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "RATA.gif",
+                        "source_uuid": "6aeb37dc-7e4c-4877-9c5a-6c5670419b67",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 12,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 268.00054931640625,
+                            "y": 27.00030517578125
+                        },
+                        "pos_rel": {
+                            "x": -1.2814804315567017,
+                            "y": -0.94999945163726807
+                        },
+                        "scale": {
+                            "x": 0.66666668653488159,
+                            "y": 0.66666668653488159
+                        },
+                        "scale_rel": {
+                            "x": 0.66666668653488159,
+                            "y": 0.66666668653488159
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "STEVE.gif",
+                        "source_uuid": "8a8474b3-8851-4c46-90ee-218b490ba23a",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 13,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1405.0,
+                            "y": 724.0
+                        },
+                        "pos_rel": {
+                            "x": 0.82407408952713013,
+                            "y": 0.34074079990386963
+                        },
+                        "scale": {
+                            "x": 3.1500000953674316,
+                            "y": 3.150442361831665
+                        },
+                        "scale_rel": {
+                            "x": 3.1500000953674316,
+                            "y": 3.150442361831665
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "BAILE",
+                        "source_uuid": "0479592a-f4fa-4beb-a358-c17c55b48587",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 3,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {
+                            "collapsed": true
+                        }
                     }
                 ]
             },
@@ -8755,7 +9392,11 @@
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
                 "libobs.show_scene_item.1": [],
-                "libobs.hide_scene_item.1": []
+                "libobs.hide_scene_item.1": [],
+                "libobs.show_scene_item.2": [],
+                "libobs.hide_scene_item.2": [],
+                "libobs.show_scene_item.3": [],
+                "libobs.hide_scene_item.3": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
@@ -8774,7 +9415,7 @@
                         "shader_file_name": "/home/rbarcala/.config/obs-studio/plugins/obs-shaderfilter/data/examples/baile_2_strobe_rgb.shader",
                         "override_entire_effect": false,
                         "bpm": 128.0,
-                        "beat_offset": 0.36525000000000007
+                        "beat_offset": 0.025999999999996248
                     },
                     "mixers": 0,
                     "sync": 0,
@@ -8924,7 +9565,7 @@
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 1,
+                "id_counter": 3,
                 "custom_size": false,
                 "items": [
                     {
@@ -8981,6 +9622,613 @@
                             "duration": 300
                         },
                         "private_settings": {}
+                    },
+                    {
+                        "name": "DISCOBALL.gif",
+                        "source_uuid": "0e2d5728-0743-43c4-a1dd-0a914f5d43d4",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 2,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 784.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -0.32592591643333435,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.3384029865264893,
+                            "y": 1.3400809764862061
+                        },
+                        "scale_rel": {
+                            "x": 1.3384029865264893,
+                            "y": 1.3400809764862061
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "DEMO.gif",
+                        "source_uuid": "f8279711-7961-4cdf-a3a9-084321f3f6c8",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 4,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1346.0,
+                            "y": 679.0
+                        },
+                        "pos_rel": {
+                            "x": 0.71481484174728394,
+                            "y": 0.25740742683410645
+                        },
+                        "scale": {
+                            "x": 1.3836734294891357,
+                            "y": 1.3834586143493652
+                        },
+                        "scale_rel": {
+                            "x": 1.3836734294891357,
+                            "y": 1.3834586143493652
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "GATOBAILE.gif",
+                        "source_uuid": "027afe92-0988-4344-812b-ee4b5fe66b62",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 6,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 578.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -0.70740741491317749,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.961904764175415,
+                            "y": 1.9625668525695801
+                        },
+                        "scale_rel": {
+                            "x": 1.961904764175415,
+                            "y": 1.9625669717788696
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "GMOD.gif",
+                        "source_uuid": "318f231a-d470-4bec-811e-50e7331f785e",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 7,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 0.0,
+                            "y": 18.0001220703125
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -0.96666646003723145
+                        },
+                        "scale": {
+                            "x": 0.79444444179534912,
+                            "y": 0.79555553197860718
+                        },
+                        "scale_rel": {
+                            "x": 0.79444444179534912,
+                            "y": 0.79555553197860718
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "KIRBY.gif",
+                        "source_uuid": "89f34ddc-8bb7-480d-b8eb-40853148c016",
+                        "visible": true,
+                        "locked": false,
+                        "rot": -18.495988845825195,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 8,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1707.672119140625,
+                            "y": 582.3121337890625
+                        },
+                        "pos_rel": {
+                            "x": 1.3845779895782471,
+                            "y": 0.078355789184570312
+                        },
+                        "scale": {
+                            "x": 1.4953271150588989,
+                            "y": 1.4921875
+                        },
+                        "scale_rel": {
+                            "x": 1.4953271150588989,
+                            "y": 1.4921875
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "PABLO.gif",
+                        "source_uuid": "aae2ed8e-3f59-401c-9595-f767514b1f10",
+                        "visible": false,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 9,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1376.0,
+                            "y": 152.000244140625
+                        },
+                        "pos_rel": {
+                            "x": 0.77037036418914795,
+                            "y": -0.71851807832717896
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "PERRO.gif",
+                        "source_uuid": "7b71c38c-af33-4b70-9cee-d2331b29e5a2",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 10,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 970.0,
+                            "y": 845.0
+                        },
+                        "pos_rel": {
+                            "x": 0.018518518656492233,
+                            "y": 0.56481480598449707
+                        },
+                        "scale": {
+                            "x": 1.6607142686843872,
+                            "y": 1.6607142686843872
+                        },
+                        "scale_rel": {
+                            "x": 1.6607142686843872,
+                            "y": 1.6607142686843872
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "PINGUINO.gif",
+                        "source_uuid": "e0b492ba-e006-40b8-9b3f-9c050e84088c",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 11,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1102.0,
+                            "y": 740.0
+                        },
+                        "pos_rel": {
+                            "x": 0.26296296715736389,
+                            "y": 0.37037038803100586
+                        },
+                        "scale": {
+                            "x": 0.77661794424057007,
+                            "y": 0.77682405710220337
+                        },
+                        "scale_rel": {
+                            "x": 0.77661794424057007,
+                            "y": 0.77682405710220337
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "RATA.gif",
+                        "source_uuid": "6aeb37dc-7e4c-4877-9c5a-6c5670419b67",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 12,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 268.00054931640625,
+                            "y": 27.00030517578125
+                        },
+                        "pos_rel": {
+                            "x": -1.2814804315567017,
+                            "y": -0.94999945163726807
+                        },
+                        "scale": {
+                            "x": 0.66666668653488159,
+                            "y": 0.66666668653488159
+                        },
+                        "scale_rel": {
+                            "x": 0.66666668653488159,
+                            "y": 0.66666668653488159
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "STEVE.gif",
+                        "source_uuid": "8a8474b3-8851-4c46-90ee-218b490ba23a",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 13,
+                        "group_item_backup": true,
+                        "pos": {
+                            "x": 1405.0,
+                            "y": 724.0
+                        },
+                        "pos_rel": {
+                            "x": 0.82407408952713013,
+                            "y": 0.34074079990386963
+                        },
+                        "scale": {
+                            "x": 3.1500000953674316,
+                            "y": 3.150442361831665
+                        },
+                        "scale_rel": {
+                            "x": 3.1500000953674316,
+                            "y": 3.150442361831665
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "BAILE",
+                        "source_uuid": "0479592a-f4fa-4beb-a358-c17c55b48587",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 1920.0,
+                            "y": 1080.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 3,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {
+                            "collapsed": true
+                        }
                     }
                 ]
             },
@@ -8998,7 +10246,11 @@
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
                 "libobs.show_scene_item.1": [],
-                "libobs.hide_scene_item.1": []
+                "libobs.hide_scene_item.1": [],
+                "libobs.show_scene_item.2": [],
+                "libobs.hide_scene_item.2": [],
+                "libobs.show_scene_item.3": [],
+                "libobs.hide_scene_item.3": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
@@ -10462,11 +11714,11 @@
                         "group_item_backup": false,
                         "pos": {
                             "x": 0.0,
-                            "y": 298.47119140625
+                            "y": 125.18798828125
                         },
                         "pos_rel": {
                             "x": -1.7777777910232544,
-                            "y": -0.44727557897567749
+                            "y": -0.76817041635513306
                         },
                         "scale": {
                             "x": 0.99521994590759277,
@@ -10516,12 +11768,12 @@
                         "id": 7,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 1435.12255859375,
-                            "y": 187.00949096679688
+                            "x": 1435.1219482421875,
+                            "y": 13.72613525390625
                         },
                         "pos_rel": {
-                            "x": 0.87985658645629883,
-                            "y": -0.65368610620498657
+                            "x": 0.8798554539680481,
+                            "y": -0.97458124160766602
                         },
                         "scale": {
                             "x": 0.99046272039413452,
@@ -11864,8 +13116,8 @@
             "settings": {
                 "id_counter": 0,
                 "custom_size": true,
-                "cx": 109,
-                "cy": 233,
+                "cx": 733,
+                "cy": 685,
                 "items": [
                     {
                         "name": "CAUGHT.png",
@@ -12335,8 +13587,8 @@
             "name": "Fuego"
         }
     ],
-    "current_scene": "VOLVIO EL PROFE",
-    "current_program_scene": "VOLVIO EL PROFE",
+    "current_scene": "Fuego",
+    "current_program_scene": "Fuego",
     "canvases": [],
     "current_transition": "Fade",
     "transition_duration": 50,

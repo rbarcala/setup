@@ -151,3 +151,4 @@ float4 mainImage(VertData v_in) : TARGET
 
     return float4(clamp(vintage_color, 0.0, 1.0), col.a);
 }
+
