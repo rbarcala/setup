@@ -13,7 +13,7 @@ Script de post-instalación para nuevas distribuciones Ubuntu.
 
 1. **Git**: Configurado automáticamente con nombre (`Ramiro Barcala Roca`) y correo (`rbarcala@fi.uba.ar`).
 2. **Xournal++**: Instalación nativa con soporte para plugins/extensiones Lua y fórmulas LaTeX (`lua5.4`, `lua-lgi`, `dvipng`, etc.).
-   - **Pen-GUI-n**: Extensión de interfaz gráfica (incluida en el repo o descargada desde GitHub).
+   - **Pen-GUI-n**: Extensión de interfaz gráfica ([rbarcala/Pen-GUI-n](https://github.com/rbarcala/Pen-GUI-n)).
    - **Dracula theme**: Paleta de colores y toolbar Dracula. Requiere activación manual en Xournal++ (*View → Toolbars → Dracula* y color de fondo `#282a36`).
 3. **Spotify**: Instalación oficial vía APT (agregando la llave GPG manualmente para evitar problemas de firmas y evadiendo Snap).
 4. **Discord + Vencord**: Descarga e instalación del `.deb` oficial de Discord e inyección automática de Vencord mediante su instalador CLI.

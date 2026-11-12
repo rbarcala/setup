@@ -97,13 +97,15 @@ mkdir -p "$HOME/.config/xournalpp/plugins"
 log_info "Instalando extensión/plugin Pen-GUI-n en Xournal++..."
 PENGUIN_TARGET="$HOME/.config/xournalpp/plugins/Pen-GUI-n"
 
-if [ -d "$PENGUIN_TARGET/.git" ]; then
+if [ -L "$PENGUIN_TARGET" ]; then
+    log_info "Pen-GUI-n ya está configurado mediante enlace simbólico ($(readlink -f "$PENGUIN_TARGET"))."
+elif [ -d "$PENGUIN_TARGET/.git" ]; then
     log_info "Actualizando Pen-GUI-n desde GitHub..."
     git -C "$PENGUIN_TARGET" pull || true
 else
-    log_info "Descargando Pen-GUI-n desde GitHub..."
+    log_info "Descargando e instalando Pen-GUI-n desde GitHub..."
     rm -rf "$PENGUIN_TARGET"
-    git clone "https://github.com/Mr-FuzzyPenguin/Pen-GUI-n.git" "$PENGUIN_TARGET" || log_warn "No se pudo clonar Pen-GUI-n"
+    git clone "https://github.com/rbarcala/Pen-GUI-n.git" "$PENGUIN_TARGET" || log_warn "No se pudo clonar Pen-GUI-n"
 fi
 log_success "Xournal++ y extensión Pen-GUI-n configurados."
 
